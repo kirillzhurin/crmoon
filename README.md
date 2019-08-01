@@ -1,1 +1,1 @@
-# CRMOON - MEAN stack
+# CRMOON
