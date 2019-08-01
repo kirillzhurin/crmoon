@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -7,8 +8,13 @@ const analyticsRoutes = require('./routes/analytics');
 const categoryRoutes = require('./routes/category');
 const orderRoutes = require('./routes/order');
 const positionRoutes = require('./routes/position');
+const keys = require('./config/keys');
 
-const app = express();
+const app = express()
+
+mongoose.connect(keys.mongoURI, { useCreateIndex: true, useNewUrlParser: true })
+  .then(() => console.log('MongoDB connected.'))
+  .catch(error => console.log(error));
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
