@@ -29,7 +29,7 @@ module.exports.create = async (req, res) => {
 }
 
 module.exports.remove = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   try {
     await Position.remove({ _id: id });
     res.send(id);
