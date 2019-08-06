@@ -43,7 +43,7 @@ module.exports.update = async (req, res) => {
   try {
     const position = await Position.findByIdAndUpdate(
       { _id: id }, 
-      req.body, 
+      { $set: req.body }, 
       { new: true }
     );
     res.status(200).json(position);
