@@ -11,9 +11,12 @@ module.exports.getAll = async (req, res) => {
 }
 
 module.exports.getById = (req, res) => {
-  res.status(200).json({
-    category: 'get by id'
-  });
+  try {
+    const category = await Category.findById(req.params.id);
+    res.status(200).json(category);
+  } catch (error) {
+    errorHandler(res, error);
+  }
 }
 
 module.exports.remove = (req, res) => {
