@@ -28,14 +28,26 @@ module.exports.create = async (req, res) => {
   }
 }
 
-module.exports.remove = (req, res) => {
-  res.status(200).json({
-    position: 'remove'
-  });
+module.exports.remove = async (req, res) => {
+  const id = req.params.id;
+  try {
+    await Position.remove({ _id: id });
+    res.send(id);
+  } catch (error) {
+    errorHandler(res, error);
+  } 
 }
 
-module.exports.update = (req, res) => {
-  res.status(200).json({
-    position: 'update'
-  });
+module.exports.update = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const position = await Position.findByIdAndUpdate(
+      { _id: id }, 
+      req.body, 
+      { new: true }
+    );
+    res.status(200).json(position);
+  } catch (error) {
+    errorHandler(res, error);
+  }
 }
