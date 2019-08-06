@@ -13,15 +13,24 @@ module.exports.getByCategoryId = async (req, res) => {
   }
 }
 
+module.exports.create = async (req, res) => {
+  const { name, cost, category } = req.body;
+  try {
+    const position = new Position({ 
+      name, 
+      cost, 
+      category, 
+      user: req.user.id
+    }).save();
+    res.status(200).json(position);
+  } catch (error) {
+    errorHandler(res, error);
+  }
+}
+
 module.exports.remove = (req, res) => {
   res.status(200).json({
     position: 'remove'
-  });
-}
-
-module.exports.create = (req, res) => {
-  res.status(200).json({
-    position: 'create'
   });
 }
 
