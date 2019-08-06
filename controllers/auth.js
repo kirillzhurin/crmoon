@@ -1,3 +1,5 @@
+const User = require('../models/User');
+
 module.exports.login = (req, res) => {
   res.status(200).json({
     email: req.body.email,
@@ -5,8 +7,26 @@ module.exports.login = (req, res) => {
   });
 };
 
-module.exports.register = (req, res) => {
-  res.status(200).json({
-    register: true
-  });
+module.exports.register = async (req, res) => {
+  const { fullName, email, password } = req.body;
+  try {
+    const candidate = await User.findOne({ email });
+    if (candidate) {
+      res.status(409).json({
+        message: 'This email is already in use.'
+      })
+    } else {
+      const user = new User({ fullName, email, password});
+      try {
+        await user.save();
+        res.status(201).json(user);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  } catch {
+    console.log(error);
+  }
+  
+  
 };
