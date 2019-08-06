@@ -24,17 +24,25 @@ module.exports.remove = async (req, res) => {
   const { id } = req.params;
   try {
     await Category.remove({ _id: id });
-    await Position.remove({ category: id })
+    await Position.remove({ category: id });
     res.send(id);
   } catch (error) {
     errorHandler(res, error);
   }
 }
 
-module.exports.create = (req, res) => {
-  res.status(200).json({
-    category: 'create'
+module.exports.create = async (req, res) => {
+  const category = await new Category({
+    name: req.body.name,
+    imageSrc: req.file ? req.file.path: '',
+    user: req.user.id
   });
+  try {
+    await category.save();
+    res.status(201).json(category);
+  } catch (error) {
+    errorHandler(res, error);
+  }  
 }
 
 module.exports.update = (req, res) => {
