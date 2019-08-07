@@ -1,4 +1,4 @@
-const Order = require('../model/Order');
+const Order = require('../models/Order');
 const errorHandler = require('../utils/errorHandler');
 
 module.exports.getAll =  async (req, res) => {
