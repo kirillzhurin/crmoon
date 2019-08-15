@@ -1,6 +1,6 @@
-*.ts text eol=lf
-*.js text eol=lf
-*.scss text eol=lf
-*.md text eol=lf
-*.html text eol=lf
-*.json text eol=lf
+*.ts linguist-detectable=true
+*.js linguist-detectable=true
+*.scss linguist-detectable=false
+*.md linguist-detectable=false
+*.html linguist-detectable=false
+*.json linguist-detectable=false
