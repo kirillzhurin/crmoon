@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthLayoutComponent implements OnInit {
   backgroundNumber = 1;
-  backgroundEnabled = false;
+  backgroundEnabled = true;
   year = new Date().getFullYear();
   constructor() { }
 

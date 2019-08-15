@@ -13,16 +13,22 @@ export class RegisterPageComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      email: new FormControl('kirillzhurin@gmail.com', [Validators.required, Validators.email]),
-      password: new FormControl('123456', [Validators.required, Validators.minLength(6)])
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
+      confirm: new FormControl(null, [Validators.required, Validators.minLength(6)])
     });
   }
 
   get email() {
     return this.form.controls.email
   }
+
   get password() {
     return this.form.controls.password
+  }
+
+  get confirm() {
+    return this.form.controls.confirm
   }
 
   submitForm(): void {

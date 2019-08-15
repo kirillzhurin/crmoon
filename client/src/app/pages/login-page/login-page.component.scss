@@ -1,22 +1,12 @@
 @import 'src/assets/styles/mixins.scss';
 
-.login {
-  background-size: cover;
-  background-color: $gray-lighten-more;
-  background-position: center center;
-}
+// .login {
+//   background-size: cover;
+//   background-color: $gray-lighten-more;
+//   background-position: center center;
+// }
 
-.title {
-  margin: 0 auto;
-  max-width: rem(820);
-  text-align: center;
-  padding-left: rem(20);
-  padding-right: rem(20);
-  h1 {
-    font-weight: 900;
-    margin-bottom: rem(30);
-  }
-}
+
 
 .block {
   padding: rem(40) rem(40) rem(80);

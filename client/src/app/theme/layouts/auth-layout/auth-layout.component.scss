@@ -9,20 +9,33 @@
   background-size: cover;
   transition: background-image 0.4s linear;
 
-  @media (max-width: $sm-max-width) {
-    ::ng-deep {
-      .login-heading {
-        display: none;
-      }
+  .title {
+    margin: 0 auto;
+    max-width: rem(820);
+    text-align: center;
+    padding-left: rem(20);
+    padding-right: rem(20);
+    h1 {
+      font-weight: 900;
+      margin-bottom: rem(30);
+    }
+    a {
+      text-decoration: underline;
     }
   }
 
+  @media (max-width: $sm-max-width) {
+    .login-heading {
+      display: none;
+    }
+  }
+
+
   &.light {
-    ::ng-deep {
-      .login-heading {
-        * {
-          color: $white;
-        }
+
+    .login-heading {
+      * {
+        color: $white;
       }
     }
 
