@@ -1,0 +1,28 @@
+<nz-layout>
+  <nz-content>
+    <div [ngClass]="{'login': true, 'light': backgroundEnabled}" [ngStyle]="{backgroundImage: backgroundEnabled ? 'url(\'assets/images/photos/' + backgroundNumber + '.jpeg\')' : 'none'}">
+      <header class="header">
+        <a href="javascript: void(0);" class="logo">
+          <img *ngIf="!backgroundEnabled" src="assets/images/logo.png" alt="Clean UI Admin Template">
+          <img *ngIf="backgroundEnabled" src="assets/images/logo-inverse.png" alt="Clean UI Admin Template">
+        </a>
+        <div class="styleControls">
+          <button nz-button nzType="default" class="mr-3" (click)="changeBackground()">Change Background</button>
+          <button nz-button nzType="default" (click)="toggleBackground()">Toggle Background</button>
+        </div>
+        <nav class="loginNav">
+          <ul class="navItems">
+            <li><a routerLinkActive="active" routerLink="/auth/login">Login</a></li>
+            <li><a routerLinkActive="active" routerLink="/auth/register">Registration</a></li>
+          </ul>
+        </nav>
+      </header>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="footer text-center">
+        <p>&copy; {{ year }} kirillzhurin</p>
+      </div>
+    </div>
+  </nz-content>
+</nz-layout>
