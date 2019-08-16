@@ -33,7 +33,7 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.register = async (req, res) => {
-  const { fullName, email, password } = req.body;
+  const { username, email, password } = req.body;
   try {
     const candidate = await User.findOne({ email });
     if (candidate) {
@@ -42,7 +42,7 @@ module.exports.register = async (req, res) => {
       })
     } else {
       const salt = bcrypt.genSaltSync(10);
-      const user = new User({ fullName, email, password: bcrypt.hashSync(password, salt) });
+      const user = new User({ username, email, password: bcrypt.hashSync(password, salt) });
       try {
         await user.save();
         res.status(201).json(user);
