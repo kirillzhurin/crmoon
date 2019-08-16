@@ -9,36 +9,39 @@
           <br />
           <form nz-form [nzLayout]="'vertical'" [formGroup]="form" (ngSubmit)="submitForm()" role="form">
             <nz-form-item>
-              <nz-form-control>
+              <nz-form-control nzErrorTip="Input your username">
                 <nz-input-group [nzPrefix]="prefixUser">
+                  <input type="text" nz-input id="username" formControlName="username" placeholder="Username">
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input valid email address">
+                <nz-input-group [nzPrefix]="prefixMail">
                   <input nz-input id="email" formControlName="email" placeholder="Email">
                 </nz-input-group>
-                <nz-form-explain *ngIf="email.dirty && email.invalid">
-                  <span *ngIf="email.errors['required']">Please input your e-mail address</span>
-                  <span *ngIf="email.errors['email']">Please input valid e-mail address</span>
-                </nz-form-explain>
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
-              <nz-form-control>
+              <nz-form-control [nzErrorTip]="errorPasswordTpl">
                 <nz-input-group [nzPrefix]="prefixLock">
-                  <input type="password" nz-input id="password" formControlName="password" placeholder="Input your password">
+                  <input type="password" nz-input id="password" formControlName="password" placeholder="Password">
+                  <ng-template #errorPasswordTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">Please input your password</ng-container>
+                    <ng-container *ngIf="control.hasError('minlength')">Password length must be minimal {{password.errors['minlength']['requiredLength']}} symbols, now {{password.errors['minlength']['actualLength']}}</ng-container>
+                  </ng-template>
                 </nz-input-group>
-                <nz-form-explain *ngIf="password.dirty && password.invalid">
-                  <span *ngIf="password.errors['required']">Please input your password</span>
-                  <span *ngIf="password.errors['minlength']">Password length must be minimal {{password.errors['minlength']['requiredLength']}} symbols, now {{password.errors['minlength']['actualLength']}}</span>
-                </nz-form-explain>
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
-              <nz-form-control>
+              <nz-form-control [nzErrorTip]="errorConfirmTpl">
                 <nz-input-group [nzPrefix]="prefixLock">
-                  <input type="password" nz-input id="confirm" formControlName="confirm" placeholder="Confirm your password">
+                  <input type="password" nz-input id="confirm" formControlName="confirm" placeholder="Confirm password">
+                  <ng-template #errorConfirmTpl let-control>
+                    <ng-container *ngIf="control.hasError('required')">Please confirm your password</ng-container>
+                    <ng-container *ngIf="control.hasError('mismatch')">Password mismatch</ng-container>
+                  </ng-template>
                 </nz-input-group>
-                <nz-form-explain *ngIf="confirm.dirty && confirm.invalid">
-                  <!-- <span *ngIf="confirm.errors['required']">Please input your password</span>
-                  <span *ngIf="confirm.errors['minlength']">Password length must be minimal {{confirm.errors['minlength']['requiredLength']}} symbols, now {{password.errors['minlength']['actualLength']}}</span> -->
-                </nz-form-explain>
               </nz-form-control>
             </nz-form-item>
             <div>
@@ -79,4 +82,5 @@
   </div>
 </div>
 <ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
+<ng-template #prefixMail><i nz-icon type="mail"></i></ng-template>
 <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>

@@ -10,26 +10,18 @@
           <form nz-form [nzLayout]="'vertical'" [formGroup]="form" (ngSubmit)="submitForm()" role="form">
             <nz-form-item>
               <nz-form-label nzFor="email">Email</nz-form-label>
-              <nz-form-control>
+              <nz-form-control nzErrorTip="Please input valid email address">
                 <nz-input-group [nzPrefix]="prefixUser">
                   <input nz-input id="email" formControlName="email">
                 </nz-input-group>
-                <nz-form-explain *ngIf="email.dirty && email.invalid">
-                  <span *ngIf="email.errors['required']">Please input your e-mail address</span>
-                  <span *ngIf="email.errors['email']">Please input valid e-mail address</span>
-                </nz-form-explain>
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
               <nz-form-label nzFor="password">Password</nz-form-label>
-              <nz-form-control>
+              <nz-form-control nzErrorTip="Please input your password">
                 <nz-input-group [nzPrefix]="prefixLock">
                   <input type="password" nz-input id="password" formControlName="password">
                 </nz-input-group>
-                <nz-form-explain *ngIf="password.dirty && password.invalid">
-                  <span *ngIf="password.errors['required']">Please input your password</span>
-                  <span *ngIf="password.errors['minlength']">Password length must be minimal {{password.errors['minlength']['requiredLength']}} symbols, now {{password.errors['minlength']['actualLength']}}</span>
-                </nz-form-explain>
               </nz-form-control>
             </nz-form-item>
             <div>

@@ -10,8 +10,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit, OnDestroy {
+  private sub: Subscription;
   form: FormGroup;
-  sub: Subscription;
   errors: string[] = [];
   messages: string[] = [];
 
@@ -20,7 +20,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.form = new FormGroup({
       email: new FormControl('kirillzhurin@gmail.com', [Validators.required, Validators.email]),
-      password: new FormControl('123456', [Validators.required, Validators.minLength(6)])
+      password: new FormControl('123456', [Validators.required])
     });
 
     this.route.queryParams.subscribe((params: Params) => {
@@ -41,15 +41,14 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   submitForm(): void {
-    this.email.markAsDirty()
-    this.email.updateValueAndValidity()
-    this.password.markAsDirty()
-    this.password.updateValueAndValidity()
-    if (this.email.invalid || this.password.invalid) return
+    const { controls } = this.form;
+    for (const i in controls) {
+      controls[i].markAsDirty();
+      controls[i].updateValueAndValidity();
+    }
+
     this.form.disable();
     this.sub = this.authService.authenticate('email', this.form.value).subscribe((result: NbAuthResult) => {
-
-
       if(result.isSuccess()) {
         this.messages = result.getMessages();
         this.router.navigate(['/dashboard']);
