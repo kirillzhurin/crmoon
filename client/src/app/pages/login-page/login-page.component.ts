@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NbAuthService, NbAuthResult } from '@nebular/auth';
 import { Subscription } from 'rxjs';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-login-page',
@@ -15,7 +16,11 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   errors: string[] = [];
   messages: string[] = [];
 
-  constructor(private authService: NbAuthService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private authService: NbAuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private notification: NzNotificationService) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -51,9 +56,14 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     this.sub = this.authService.authenticate('email', this.form.value).subscribe((result: NbAuthResult) => {
       if(result.isSuccess()) {
         this.messages = result.getMessages();
+        this.notification.success(
+          'Logged In',
+          this.messages[0]
+        )
         this.router.navigate(['/dashboard']);
       } else {
         this.errors = result.getErrors();
+        this.notification.error('Authentication Error', this.errors[0]);
         this.form.enable();
       }
     });
