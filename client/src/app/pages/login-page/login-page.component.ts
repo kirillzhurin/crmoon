@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NbAuthService, NbAuthResult } from '@nebular/auth';
 import { Subscription } from 'rxjs';
-import { NzNotificationService } from 'ng-zorro-antd';
+import { NzNotificationService, NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-login-page',
@@ -20,7 +20,8 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     private authService: NbAuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private notification: NzNotificationService) {}
+    private notification: NzNotificationService,
+    private message: NzMessageService) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -30,9 +31,12 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
     this.route.queryParams.subscribe((params: Params) => {
       if (params['registered']) {
+        setTimeout(() => {
+          this.notification.blank('Thank you for choosing us.', 'Now you can log in using your account.');
+        }, 1000)
 
       } else if (params['accessDenied']) {
-
+        this.message.warning('Access denied, you must log in to the system!');
       }
     });
   }
