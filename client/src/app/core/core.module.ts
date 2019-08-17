@@ -1,6 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpErrorResponse } from '@angular/common/http';
 import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken, NbAuthJWTInterceptor } from '@nebular/auth';
 
 
@@ -18,6 +18,12 @@ const PROVIDERS = [
         },
         register: {
           endpoint: 'register'
+        },
+        errors: {
+          key: 'message',
+        },
+        messages: {
+          key: 'message',
         }
       })
     ]

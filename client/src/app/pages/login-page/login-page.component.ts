@@ -63,7 +63,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         this.router.navigate(['/dashboard']);
       } else {
         this.errors = result.getErrors();
-        this.notification.error('Authentication Error', this.errors[0]);
+        this.notification.error('Not Logged In', this.errors[0]);
         this.form.enable();
       }
     });

@@ -16,10 +16,10 @@ module.exports.login = async (req, res) => {
         email,
         userId: candidate._id
       }, keys.jwtKey, {expiresIn: 60 * 60 * 3})
-      res.status(200).json({ token })
+      res.status(200).json({ token, message: 'You have been successfully logged in.' })
     } else {
       res.status(401).json({
-        message: 'Invalid email or password'
+        message: 'Login/Email combination is not correct, please try again.'
       });
     }
   } else {
@@ -45,7 +45,7 @@ module.exports.register = async (req, res) => {
       const user = new User({ username, email, password: bcrypt.hashSync(password, salt) });
       try {
         await user.save();
-        res.status(201).json(user);
+        res.status(201).json({message: 'You have been successfully registered.'});
       } catch (error) {
         errorHandler(res, error);
       }

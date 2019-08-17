@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms'
 import { NbAuthService, NbAuthResult } from '@nebular/auth';
 import { Subscription } from 'rxjs';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 
 @Component({
@@ -16,7 +17,11 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   errors: string[] = [];
   messages: string[] = [];
 
-  constructor(private authService: NbAuthService, private router: Router) {}
+  constructor(
+    private authService: NbAuthService,
+    private router: Router,
+    private notification: NzNotificationService
+  ) {}
 
   private passwordMatchValidator(g: FormGroup) {
     let password: AbstractControl = g.get('password');
@@ -81,14 +86,15 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
     this.authService.register('email', {username, email, password}).subscribe((result: NbAuthResult) => {
       if(result.isSuccess()) {
         this.messages = result.getMessages();
+        this.notification.success('Registered', this.messages[0]);
         this.router.navigate(['/auth/login'], {
           queryParams: {
             registered: true
           }
-        }
-      );
+        });
       } else {
         this.errors = result.getErrors();
+        this.notification.error('Not Registered', this.errors[0]);
         this.form.enable();
       }
     });
