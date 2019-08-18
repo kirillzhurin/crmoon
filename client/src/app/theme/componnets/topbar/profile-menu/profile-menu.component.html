@@ -1,0 +1,35 @@
+<a nz-dropdown nzTrigger="click" class="dropdown" [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'" (nzVisibleChange)="badgeCountIncrease()">
+  <nz-badge [nzCount]="badgeCount">
+    <nz-avatar nzIcon="user" [nzShape]="'square'" [nzSize]="'large'" class="avatar"></nz-avatar>
+  </nz-badge>
+</a>
+<nz-dropdown-menu  #menu="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item>
+      <strong>Hello, {{user?.username}}</strong>
+    </li>
+    <li nz-menu-divider></li>
+    <li nz-menu-item>
+      <div>
+        <strong>
+          Email:
+        </strong>
+        {{user?.email}}
+      </div>
+    </li>
+    <li nz-menu-divider></li>
+    <li nz-menu-item>
+      <a href="javascript: void(0);">
+        <i class="menuIcon icmn-user"></i>
+        Edit Profile
+      </a>
+    </li>
+    <li nz-menu-divider></li>
+    <li nz-menu-item >
+      <a href="javascript: void(0);" (click)="logout()">
+        <i class="menuIcon icmn-exit"></i>
+        Logout
+      </a>
+    </li>
+  </ul>
+</nz-dropdown-menu>

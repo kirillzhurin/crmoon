@@ -67,7 +67,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   }
 
   get username() {
-    return this.form.controls.password
+    return this.form.controls.username
   }
 
   get confirm() {

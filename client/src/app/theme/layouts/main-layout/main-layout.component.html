@@ -10,12 +10,16 @@
   <nz-sider *ngIf="!isMobileView && !isMenuTop" [ngClass]="isLightTheme ? 'sider light' : 'sider'" nzCollapsible [nzWidth]="256" [(nzCollapsed)]="isMenuCollapsed" (nzCollapsedChange)="onCollapse($event)">
     <app-menu-left [isMenuCollapsed]="isMenuCollapsed"></app-menu-left>
   </nz-sider>
+
   <!-- top menu -->
   <div *ngIf="isMenuTop && !isMobileView">
     <app-menu-top></app-menu-top>
   </div>
   <app-settings></app-settings>
   <nz-layout>
+    <nz-header>
+      <app-topbar></app-topbar>
+    </nz-header>
     <nz-content style="height: 100%; position: relative;">
       <div class="utils__content">
         <router-outlet></router-outlet>

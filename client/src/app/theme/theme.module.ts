@@ -1,13 +1,13 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
-import { IconDefinition } from '@ant-design/icons-angular'
-import * as AllIcons from '@ant-design/icons-angular/icons'
-import { NZ_ICONS } from 'ng-zorro-antd'
 
+import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { IconDefinition } from '@ant-design/icons-angular';
+import * as AllIcons from '@ant-design/icons-angular/icons';
+import { NZ_ICONS } from 'ng-zorro-antd';
 
 import {
   // BreadcrumbsComponent,
@@ -15,15 +15,14 @@ import {
   MenuLeftComponent,
   MenuTopComponent,
   SettingsComponent,
-  // TopbarComponent,
-  // TopbarBitcoinPriceComponent,
-  // TopbarHomeMenuComponent,
-  // TopbarIssuesHistoryComponent,
-  // TopbarLiveSearchComponent,
-  // TopbarProfileMenuComponent,
-  // TopbarProjectManagementComponent
+  TopbarComponent,
+  TopbarProfileMenuComponent
 } from './componnets';
-import { MainLayoutComponent, AuthLayoutComponent } from './layouts';
+
+import {
+  MainLayoutComponent,
+  AuthLayoutComponent
+} from './layouts';
 
 /**
  * AntDesign Icons
@@ -43,13 +42,8 @@ const COMPONENTS = [
   MenuLeftComponent,
   MenuTopComponent,
   SettingsComponent,
-  // TopbarComponent,
-  // TopbarBitcoinPriceComponent,
-  // TopbarHomeMenuComponent,
-  // TopbarIssuesHistoryComponent,
-  // TopbarLiveSearchComponent,
-  // TopbarProfileMenuComponent,
-  // TopbarProjectManagementComponent
+  TopbarComponent,
+  TopbarProfileMenuComponent,
 ];
 const LAYOUTS = [MainLayoutComponent, AuthLayoutComponent]
 
