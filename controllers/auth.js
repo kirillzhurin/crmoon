@@ -12,7 +12,7 @@ module.exports.login = async (req, res) => {
     const passwordResult = bcrypt.compareSync(password, candidate.password);
     if (passwordResult) {
       const token = jwt.sign({
-        fullName: candidate.fullName,
+        username: candidate.username,
         email,
         userId: candidate._id
       }, keys.jwtKey, {expiresIn: 60 * 60 * 3})
@@ -54,3 +54,8 @@ module.exports.register = async (req, res) => {
     errorHandler(res, error);
   }
 };
+
+module.exports.logout = (req, res) => {
+  req.logout();
+  res.send();
+}
