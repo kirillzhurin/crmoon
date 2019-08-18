@@ -1,11 +1,28 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar'
 import { RouterModule } from '@angular/router';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { IconDefinition } from '@ant-design/icons-angular'
 import * as AllIcons from '@ant-design/icons-angular/icons'
 import { NZ_ICONS } from 'ng-zorro-antd'
 
+
+import {
+  // BreadcrumbsComponent,
+  // FooterComponent,
+  MenuLeftComponent,
+  // MenuTopComponent,
+  SettingsComponent,
+  // TopbarComponent,
+  // TopbarBitcoinPriceComponent,
+  // TopbarHomeMenuComponent,
+  // TopbarIssuesHistoryComponent,
+  // TopbarLiveSearchComponent,
+  // TopbarProfileMenuComponent,
+  // TopbarProjectManagementComponent
+} from './componnets';
 import { MainLayoutComponent, AuthLayoutComponent } from './layouts';
 
 /**
@@ -20,12 +37,26 @@ const PROVIDERS = [
   { provide: NZ_ICONS, useValue: icons }
 ];
 
-const COMPONENTS = [MainLayoutComponent, AuthLayoutComponent];
+const COMPONENTS = [
+  // BreadcrumbsComponent,
+  // FooterComponent,
+  MenuLeftComponent,
+  // MenuTopComponent,
+  SettingsComponent,
+  // TopbarComponent,
+  // TopbarBitcoinPriceComponent,
+  // TopbarHomeMenuComponent,
+  // TopbarIssuesHistoryComponent,
+  // TopbarLiveSearchComponent,
+  // TopbarProfileMenuComponent,
+  // TopbarProjectManagementComponent
+];
+const LAYOUTS = [MainLayoutComponent, AuthLayoutComponent]
 
 @NgModule({
-  declarations: [...COMPONENTS],
-  exports: [...COMPONENTS, NgZorroAntdModule],
-  imports: [CommonModule, RouterModule, NgZorroAntdModule]
+  declarations: [...COMPONENTS, ...LAYOUTS],
+  exports: [...COMPONENTS, ...LAYOUTS, NgZorroAntdModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, NgZorroAntdModule, PerfectScrollbarModule]
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {
