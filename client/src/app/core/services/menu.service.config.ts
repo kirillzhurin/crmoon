@@ -71,10 +71,9 @@ export const getTopMenuData: any[] = [
         url: '/order/new',
       },
       {
-        title: 'positions ',
+        title: 'Positions ',
         key: 'positions',
         url: '/positions',
-        pro: true,
       },
     ],
   },
