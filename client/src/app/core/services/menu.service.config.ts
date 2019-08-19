@@ -9,7 +9,7 @@ export const getLeftMenuData: any[] = [
   {
     title: 'Analytics',
     key: 'analytics',
-    icon: 'icmn icmn-stats-bars',
+    icon: 'icmn icmn-chart',
     url: '/analytics',
   },
   {
@@ -27,7 +27,7 @@ export const getLeftMenuData: any[] = [
   {
     title: 'Positions',
     key: 'positions',
-    icon: 'icmn icmn-store2',
+    icon: 'icmn icmn-cube4',
     url: '/positions',
   },
   {

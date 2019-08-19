@@ -10,7 +10,13 @@
   <nz-sider *ngIf="!isMobileView && !isMenuTop" [ngClass]="isLightTheme ? 'sider light' : 'sider'" nzCollapsible [nzWidth]="256" [(nzCollapsed)]="isMenuCollapsed" (nzCollapsedChange)="onCollapse($event)">
     <app-menu-left [isMenuCollapsed]="isMenuCollapsed"></app-menu-left>
   </nz-sider>
-
+  <!-- mobile menu with drawer -->
+  <nz-drawer *ngIf="isMobileView" [nzClosable]="false" [nzWrapClassName]="'mobileMenu'" [nzVisible]="isMobileMenuOpen" nzPlacement="left" (nzOnClose)="toggleMobileMenu()">
+    <div class="mobileMenu-handler" (click)="toggleMobileMenu()">
+      <div class="mobileMenu-handlerIcon"></div>
+    </div>
+    <app-menu-left></app-menu-left>
+  </nz-drawer>
   <!-- top menu -->
   <div *ngIf="isMenuTop && !isMobileView">
     <app-menu-top></app-menu-top>
@@ -21,9 +27,13 @@
       <app-topbar></app-topbar>
     </nz-header>
     <nz-content style="height: 100%; position: relative;">
+      <app-breadcrumbs></app-breadcrumbs>
       <div class="utils__content">
         <router-outlet></router-outlet>
-        </div>
+      </div>
     </nz-content>
+    <nz-footer>
+      <app-footer></app-footer>
+    </nz-footer>
   </nz-layout>
 </nz-layout>

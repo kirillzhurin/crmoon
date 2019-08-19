@@ -10,8 +10,8 @@ import * as AllIcons from '@ant-design/icons-angular/icons';
 import { NZ_ICONS } from 'ng-zorro-antd';
 
 import {
-  // BreadcrumbsComponent,
-  // FooterComponent,
+  BreadcrumbsComponent,
+  FooterComponent,
   MenuLeftComponent,
   MenuTopComponent,
   SettingsComponent,
@@ -37,8 +37,8 @@ const PROVIDERS = [
 ];
 
 const COMPONENTS = [
-  // BreadcrumbsComponent,
-  // FooterComponent,
+  BreadcrumbsComponent,
+  FooterComponent,
   MenuLeftComponent,
   MenuTopComponent,
   SettingsComponent,
