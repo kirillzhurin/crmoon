@@ -3,6 +3,7 @@ import { Router, NavigationStart } from '@angular/router'
 import { filter } from 'rxjs/operators'
 import * as _ from 'lodash'
 import { select, Store } from '@ngrx/store'
+import { RootState } from 'src/app/core/store';
 import { MenuService } from 'src/app/core/services/menu.service'
 import * as settingsActions from 'src/app/core/store/settings/settings.actions'
 import * as settingsSelectors from 'src/app/core/store/settings/settings.selectors'
@@ -21,7 +22,7 @@ export class MenuTopComponent implements OnInit {
 
   constructor(
     private menuService: MenuService,
-    private store: Store<any>,
+    private store: Store<RootState>,
     private router: Router,
   ) {}
 

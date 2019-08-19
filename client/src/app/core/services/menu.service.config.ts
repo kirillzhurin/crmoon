@@ -22,13 +22,13 @@ export const getLeftMenuData: any[] = [
     title: 'Add Order',
     key: 'addOrder',
     icon: 'icmn icmn-plus-circle',
-    url: '/order/new',
+    url: '/order',
   },
   {
-    title: 'Positions',
-    key: 'positions',
-    icon: 'icmn icmn-cube4',
-    url: '/positions',
+    title: 'Categories',
+    key: 'categories',
+    icon: 'icmn icmn-stack',
+    url: '/categories',
   },
   {
     divider: true,

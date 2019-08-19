@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { RootState } from './core/store'
 import * as settingsActions from './core/store/settings/settings.actions'
 
 declare var window;
@@ -12,7 +13,7 @@ declare var window;
 export class AppComponent implements OnInit {
   title = 'client';
 
-  constructor(private store: Store) {}
+  constructor(private store: Store<RootState>) {}
 
   ngOnInit() {
     // detecting & set mobile/tablet/desktop viewports

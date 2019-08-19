@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { NbAuthService, NbAuthJWTToken, NB_AUTH_OPTIONS, NbAuthResult } from '@nebular/auth';
+import { NbAuthService, NbAuthJWTToken, NbAuthResult } from '@nebular/auth';
 
 @Component({
   selector: 'app-topbar-profile-menu',
@@ -9,11 +9,6 @@ import { NbAuthService, NbAuthJWTToken, NB_AUTH_OPTIONS, NbAuthResult } from '@n
 })
 export class TopbarProfileMenuComponent {
   badgeCount: number = 7;
-  // userName: string;
-  // billingPlan: string;
-  // email: string;
-  // phone: string;
-  // role: string;
   user = {};
 
   constructor(

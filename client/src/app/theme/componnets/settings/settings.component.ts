@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core'
-import { select, Store } from '@ngrx/store'
-import * as settingsActions from 'src/app/core/store/settings/settings.actions'
-import * as settingsSelectors from 'src/app/core/store/settings/settings.selectors'
+import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { RootState } from 'src/app/core/store';
+import * as settingsActions from 'src/app/core/store/settings/settings.actions';
+import * as settingsSelectors from 'src/app/core/store/settings/settings.selectors';
 
 @Component({
   selector: 'app-settings',
@@ -18,7 +19,7 @@ export class SettingsComponent {
   isSquaredBorders: boolean = false
   isFixedWidth: boolean = false
 
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<RootState>) {
     this.store.pipe(select(settingsSelectors.selectSettings)).subscribe(state => {
       this.isSettingsOpen = state.isSettingsOpen
       this.isMenuTop = state.isMenuTop
