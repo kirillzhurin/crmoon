@@ -8,13 +8,21 @@ import { AuthGuard } from './core/guards/auth.guard';
 import {
   LoginPageComponent,
   RegisterPageComponent,
-  DashboardPageComponent
+  DashboardPageComponent,
+  AnalyticsPageComponent,
+  HistoryPageComponent,
+  CategoriesPageComponent,
+  OrderPageComponent
 } from './pages';
 
 const COMPONENTS = [
   LoginPageComponent,
   RegisterPageComponent,
-  DashboardPageComponent
+  DashboardPageComponent,
+  AnalyticsPageComponent,
+  HistoryPageComponent,
+  CategoriesPageComponent,
+  OrderPageComponent
 ];
 
 const routes: Routes = [
@@ -23,7 +31,11 @@ const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'dashboard', component: DashboardPageComponent}
+      { path: 'dashboard', component: DashboardPageComponent },
+      { path: 'analytics', component: AnalyticsPageComponent },
+      { path: 'history', component: HistoryPageComponent },
+      { path: 'order', component: OrderPageComponent },
+      { path: 'categories', component: CategoriesPageComponent }
     ]
   },
   {
