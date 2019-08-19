@@ -3,7 +3,7 @@ import { Router, NavigationStart } from '@angular/router'
 import { filter } from 'rxjs/operators'
 import * as _ from 'lodash'
 import { select, Store } from '@ngrx/store'
-import { MenuService } from 'src/app/core/services/menu.service'
+import { MenuService } from 'src/app/core/utils/menu.service'
 import { RootState } from 'src/app/core/store';
 import * as settingsActions from 'src/app/core/store/settings/settings.actions';
 import * as settingsSelectors from 'src/app/core/store/settings/settings.selectors';

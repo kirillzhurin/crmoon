@@ -27,7 +27,7 @@ export const getLeftMenuData: any[] = [
   {
     title: 'Categories',
     key: 'categories',
-    icon: 'icmn icmn-stack',
+    icon: 'icmn icmn-cube4',
     url: '/categories',
   },
   {

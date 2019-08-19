@@ -3,7 +3,8 @@ import { Router, NavigationStart } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs/operators';
 import { reduce } from 'lodash';
-import { MenuService } from 'src/app/core/services/menu.service';
+import { MenuService } from 'src/app/core/utils/menu.service';
+import { RootState } from 'src/app/core/store';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -11,12 +12,12 @@ import { MenuService } from 'src/app/core/services/menu.service';
   styleUrls: ['./breadcrumbs.component.scss'],
 })
 export class BreadcrumbsComponent {
-  menuData: any[]
-  breadcrumbs: any[]
+  menuData: any[];
+  breadcrumbs: any[];
 
   constructor(
     private menuService: MenuService,
-    private store: Store<any>,
+    private store: Store<RootState>,
     private router: Router,
   ) {}
 
