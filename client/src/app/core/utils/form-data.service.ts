@@ -9,7 +9,7 @@ export class FormDataService {
 
   create(data: any = {}): FormData {
     const formData = new FormData();
-    Object.keys(data).map((key) => {
+    Object.keys(data).forEach((key) => {
       if (!isUndefined(data[key])) {
         formData.append(key, data[key]);
       }
