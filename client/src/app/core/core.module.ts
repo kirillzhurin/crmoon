@@ -1,11 +1,10 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken, NbAuthJWTInterceptor } from '@nebular/auth';
+import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken, NbAuthJWTInterceptor, NB_AUTH_TOKEN_INTERCEPTOR_FILTER } from '@nebular/auth';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
 import { environment } from '../../environments/environment' // Angular CLI environment
 import { reducers, metaReducers } from './store';
 import { CategoryEffect } from './store/categories'
@@ -34,9 +33,15 @@ const PROVIDERS = [
       })
     ]
   }).providers,
-  { provide: HTTP_INTERCEPTORS, multi: true, useClass: NbAuthJWTInterceptor }
+  { provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: req => {
+    if (req.url === '/api/auth/refresh-token') {
+      return true;
+    }
+      return false;
+    }
+  },
+  { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true }
 ];
-
 @NgModule({
   declarations: [],
   imports: [

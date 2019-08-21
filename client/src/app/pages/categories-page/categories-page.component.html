@@ -1,1 +1,32 @@
-<p>categories-page works!</p>
+<section class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="utils__title">
+        <strong>List of Categories</strong>
+      </div>
+      <div class="">
+        <button nz-button nzType="primary">New Category</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="feed">
+        <div class="partition" *ngIf="categoriesDemo$ | async as categoriesDemo">
+          <ul class="partitionContent">
+            <li class="item" *ngFor="let category of categoriesDemo">
+              <a href="javascript: void(0);" class="itemLink">
+                <img [src]="category.imageSrc" [alt]="category.name" class="itemThumb">
+                <div class="itemDescr">
+                  <span class="itemName">{{category.name}}</span>
+                  <span class="itemAuthor">{{category.user}}</span>
+                  <span class="text-muted itemDescr">{{category.views}} views</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="mb-5">
+          <nz-pagination [nzPageIndex]="1" [nzTotal]="50"></nz-pagination>
+        </div>
+      </div>
+    </div>
+  </section>
+

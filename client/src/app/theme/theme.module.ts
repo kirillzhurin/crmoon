@@ -50,7 +50,14 @@ const LAYOUTS = [MainLayoutComponent, AuthLayoutComponent]
 @NgModule({
   declarations: [...COMPONENTS, ...LAYOUTS],
   exports: [...COMPONENTS, ...LAYOUTS, NgZorroAntdModule],
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, NgZorroAntdModule, PerfectScrollbarModule]
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgZorroAntdModule,
+    PerfectScrollbarModule
+  ]
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {
