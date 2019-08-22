@@ -5,7 +5,7 @@ const selectCategoriesState = createFeatureSelector<State>('categories');
 
 export const { selectIds, selectAll, selectEntities, selectTotal } = adapter.getSelectors();
 
-export const  selectcAllCategories = createSelector(
+export const selectAllCategories = createSelector(
   selectCategoriesState,
   selectAll
 );
@@ -15,7 +15,7 @@ export const selectCategoryEntities = createSelector(
   selectEntities
 );
 
-export const selectCategoriesById = createSelector(
+export const selectCategoryById = createSelector(
   selectCategoryEntities,
   (entities, props) => entities[props.id]
 );

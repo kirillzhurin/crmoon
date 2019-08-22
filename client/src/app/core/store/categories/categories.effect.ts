@@ -40,7 +40,6 @@ export class CategoryEffect {
     mergeMap(({ payload: { name, image } }: actions.CreateCategoryAction) => this.categoryService.create(name, image)
       .pipe(
         map(res => {
-          // 'Category has been created successfully'
           return new actions.CreateCategorySuccessAction(res);
         }),
         catchError(() => of(new actions.GetCategoryFailAction()))
@@ -54,7 +53,6 @@ export class CategoryEffect {
     mergeMap(({ payload: { id, name, image } }: actions.UpdateCategoryAction) => this.categoryService.update(id, name, image)
       .pipe(
         map(res => {
-          //'Category has been updated successfully'
           return new actions.UpdateCategorySuccessAction(res);
         }),
         catchError(() => of(new actions.UpdateCategoryFailAction()))
@@ -68,10 +66,12 @@ export class CategoryEffect {
     mergeMap(({ payload: id }: actions.DeleteCategoryAction) => this.categoryService.delete(id)
       .pipe(
         map(res => {
-          // 'Category has been deleted'
-          return new actions.DeleteCategorySuccessAction(res.id);
+          return new actions.DeleteCategorySuccessAction(res);
         }),
-        catchError(() => of(new actions.DeleteCategoryFailAction()))
+        catchError((err) => {
+            return of(new actions.DeleteCategoryFailAction())
+          }
+        )
       )
     )
   );
