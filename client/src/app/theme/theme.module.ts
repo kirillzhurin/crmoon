@@ -1,14 +1,14 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, ModuleWithProviders, LOCALE_ID } from '@angular/core';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import { default as localeEn } from '@angular/common/locales/en'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_I18N, en_US as localeZorro } from 'ng-zorro-antd';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { NZ_ICONS } from 'ng-zorro-antd';
-
 import {
   BreadcrumbsComponent,
   FooterComponent,
@@ -24,6 +24,12 @@ import {
   AuthLayoutComponent
 } from './layouts';
 
+const LOCALE_PROVIDERS = [
+  { provide: LOCALE_ID, useValue: 'en' },
+  { provide: NZ_I18N, useValue: localeZorro },
+]
+registerLocaleData(localeEn, 'en')
+
 /**
  * AntDesign Icons
  */
@@ -33,6 +39,7 @@ const antDesignIcons = AllIcons as {
 const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
 
 const PROVIDERS = [
+  ...LOCALE_PROVIDERS,
   { provide: NZ_ICONS, useValue: icons }
 ];
 

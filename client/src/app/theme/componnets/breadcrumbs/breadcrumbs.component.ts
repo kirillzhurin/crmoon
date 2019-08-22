@@ -22,7 +22,7 @@ export class BreadcrumbsComponent {
   ) {}
 
   ngOnInit() {
-    this.menuService.getLeftMenuData().subscribe(menuData => (this.menuData = menuData))
+    this.menuService.getLeftMenuData().subscribe(menuData => this.menuData = menuData);
     this.generateBreadcrumbs(this.router.url)
     this.router.events
       .pipe(filter(event => event instanceof NavigationStart))

@@ -19,16 +19,26 @@ export const getLeftMenuData: any[] = [
     url: '/history',
   },
   {
-    title: 'Add Order',
-    key: 'addOrder',
-    icon: 'icmn icmn-plus-circle',
-    url: '/order',
-  },
-  {
-    title: 'Categories',
-    key: 'categories',
-    icon: 'icmn icmn-cube4',
-    url: '/categories',
+    title: 'eCommerce',
+    key: 'ecommerce',
+    icon: 'icmn icmn-store2',
+    children: [
+      {
+        title: 'Categories',
+        key: 'categories',
+        url: '/ecommerce/categories',
+      },
+      {
+        title: 'Products',
+        key: 'products',
+        url: '/ecommerce/products',
+      },
+      {
+        title: 'Orders',
+        key: 'orders',
+        url: '/ecommerce/orders',
+      }
+    ],
   },
   {
     divider: true,

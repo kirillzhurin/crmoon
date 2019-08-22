@@ -1,0 +1,16 @@
+@import 'src/assets/styles/mixins.scss';
+
+.preview {
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  overflow: hidden;
+  background-color: $gray-lighten-more;
+  width: 100%;
+  height: 180px;
+  margin-bottom: rem(10);
+
+  img {
+    width: 100%
+  }
+}

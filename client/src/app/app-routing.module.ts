@@ -10,9 +10,7 @@ import {
   RegisterPageComponent,
   DashboardPageComponent,
   AnalyticsPageComponent,
-  HistoryPageComponent,
-  CategoriesPageComponent,
-  OrderPageComponent
+  HistoryPageComponent
 } from './pages';
 
 const COMPONENTS = [
@@ -20,9 +18,7 @@ const COMPONENTS = [
   RegisterPageComponent,
   DashboardPageComponent,
   AnalyticsPageComponent,
-  HistoryPageComponent,
-  CategoriesPageComponent,
-  OrderPageComponent
+  HistoryPageComponent
 ];
 
 const routes: Routes = [
@@ -34,8 +30,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardPageComponent },
       { path: 'analytics', component: AnalyticsPageComponent },
       { path: 'history', component: HistoryPageComponent },
-      { path: 'order', component: OrderPageComponent },
-      { path: 'categories', component: CategoriesPageComponent }
+      { path: 'ecommerce', loadChildren: () => import('./pages/ecommerce/ecommerce.module').then(m => m.EcommerceModule) },
     ]
   },
   {
