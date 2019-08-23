@@ -3,7 +3,7 @@
       <div class="utils__title">
         <strong>List of Categories</strong>
       </div>
-      <div>
+      <div *ngIf="(categories$ | async).length">
         <button nz-button nzType="primary" [routerLink]="['./new']">New Category</button>
       </div>
     </div>
@@ -11,24 +11,36 @@
       <div class="feed">
         <div class="partition" *ngIf="categories$ | async as categories">
           <ul class="partitionContent" *ngIf="categories.length; else empty">
-            <li class="item" *ngFor="let category of categories">
+            <li class="item" *ngFor="let category of categories"  >
               <a [routerLink]="['./', category._id]" class="itemLink">
-                <img [src]="category?.imageSrc" [alt]="category.name" class="itemThumb">
+                <img [src]="category?.imageSrc || emptyImage" [alt]="category.name" class="itemThumb">
                 <div class="itemDescr">
                   <span class="itemName">{{category.name}}</span>
                   <!-- <span class="itemAuthor">{{category.user}}</span>
-                  <span class="text-muted itemDescr">{{category.views}} views</span> -->
+                  <span class="text-muted itemDescr">{{category.description}}</span> -->
                 </div>
               </a>
             </li>
           </ul>
           <ng-template #empty>
-            <nz-alert [nzType]="'info'" [nzMessage]="'Empty'" [nzDescription]="'You don\'t have any categories.'"></nz-alert>
+            <nz-empty [nzNotFoundContent]="contentTpl" [nzNotFoundFooter]="footerTpl">
+              <ng-template #contentTpl>
+                <span>You don't have any categories.</span>
+              </ng-template>
+              <ng-template #footerTpl>
+                <button [routerLink]="['./new']" nz-button nzType="primary">Create Now</button>
+              </ng-template>
+            </nz-empty>
           </ng-template>
+
+
+          <!-- <ng-template #empty>
+            <nz-alert [nzType]="'info'" [nzMessage]="'Empty'" [nzDescription]="'You don\'t have any categories.'"></nz-alert>
+          </ng-template> -->
         </div>
-        <div class="pagination-container">
+        <!-- <div class="pagination-container">
           <nz-pagination [nzPageIndex]="1" [nzTotal]="50"></nz-pagination>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>

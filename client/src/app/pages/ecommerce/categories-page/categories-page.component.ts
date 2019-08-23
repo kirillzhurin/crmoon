@@ -14,6 +14,7 @@ import Category from 'src/app/core/models/category';
 export class CategoriesPageComponent implements OnInit {
   categories$: Observable<Category[]>
   loading$: Observable<boolean>;
+  emptyImage = 'assets/images/ecommerce/ecommerce-empty.jpg';
 
   constructor(private store: Store<RootState>, private router: Router) {
   }
