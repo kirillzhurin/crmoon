@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
+import { Router } from '@angular/router';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { mergeMap, map, catchError, switchMap } from 'rxjs/operators';
+import { mergeMap, map, catchError, tap } from 'rxjs/operators';
 import { CategoryService} from '../../services/category.service';
 import * as actions from './categories.actions';
 
 @Injectable()
 export class CategoryEffect {
-  constructor(private actions$: Actions, private categoryService: CategoryService) {}
+  constructor(private actions$: Actions, private categoryService: CategoryService, private router: Router) {}
 
   @Effect()
   loadCateories$: Observable<actions.CategoryActions> = this.actions$.pipe(
@@ -37,7 +37,7 @@ export class CategoryEffect {
   @Effect()
   createCategory$: Observable<actions.CategoryActions> = this.actions$.pipe(
     ofType(actions.CREATE_CATEGORY),
-    mergeMap(({ payload: { name, image } }: actions.CreateCategoryAction) => this.categoryService.create(name, image)
+    mergeMap(({ payload }: actions.CreateCategoryAction) => this.categoryService.create(payload)
       .pipe(
         map(res => {
           return new actions.CreateCategorySuccessAction(res);
@@ -50,7 +50,7 @@ export class CategoryEffect {
   @Effect()
   updateCategory$: Observable<actions.CategoryActions> = this.actions$.pipe(
     ofType(actions.UPDATE_CATEGORY),
-    mergeMap(({ payload: { id, name, image } }: actions.UpdateCategoryAction) => this.categoryService.update(id, name, image)
+    mergeMap(({ payload }: actions.UpdateCategoryAction) => this.categoryService.update(payload)
       .pipe(
         map(res => {
           return new actions.UpdateCategorySuccessAction(res);
@@ -74,5 +74,11 @@ export class CategoryEffect {
         )
       )
     )
+  );
+
+  @Effect({ dispatch: false })
+  navigateToCategories$ = this.actions$.pipe(
+    ofType(actions.DELETE_CATEGORY_SUCCESS, actions.CREATE_CATEGORY_SUCCESS),
+    tap(() => this.router.navigate(['/ecommerce/categories']))
   );
 }

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Observer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { NzModalService } from 'ng-zorro-antd';
+import { NzModalService, UploadFile, NzMessageService } from 'ng-zorro-antd';
 import Category from 'src/app/core/models/category';
 import { RootState } from 'src/app/core/store';
 import {
@@ -22,20 +22,23 @@ import {
 })
 export class CategoryFormComponent implements OnInit {
   id: any;
-  imagePreview: any = '';
+  loadingImage = false;
+  imagePreview: string;
+  imageFile: File;
   form: FormGroup;
   category$: Observable<Category>;
   loading$: Observable<boolean>;
 
   constructor(
-    private modalService: NzModalService,
     private route: ActivatedRoute,
-    private store: Store<RootState>) { }
+    private store: Store<RootState>,
+    private modalService: NzModalService,
+    private messageService: NzMessageService) { }
 
   ngOnInit() {
     this.form = new FormGroup({
-      name: new FormControl(null, Validators.required),
-      description: new FormControl(null)
+      name: new FormControl('', Validators.required),
+      description: new FormControl('')
     });
 
     this.route.params
@@ -59,12 +62,58 @@ export class CategoryFormComponent implements OnInit {
 
   onSubmit() {
     const data = this.form.value;
+    data.image = this.imageFile;
     if (this.id) {
       data.id = this.id;
       this.store.dispatch(new UpdateCategoryAction(data));
     } else {
       this.store.dispatch(new CreateCategoryAction(data));
     }
+  }
+
+  beforeUpload = (file: File) => {
+    return new Observable((observer: Observer<boolean>) => {
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        this.messageService.error('Image must smaller than 2MB!');
+        observer.complete();
+        return;
+      }
+
+      this.checkImageDimension(file).then(dimensionRes => {
+        if (!dimensionRes) {
+          this.messageService.error('Image only 300x300 above');
+          observer.complete();
+          return;
+        }
+        this.imageFile = file;
+        this.loadingImage = true;
+        this.getBase64(file, (img: string) => {
+          this.loadingImage = false;
+          this.imagePreview = img;
+        })
+        observer.complete();
+      });
+    });
+  }
+
+  private checkImageDimension(file: File): Promise<boolean> {
+    return new Promise(resolve => {
+      const img = new Image(); // create image
+      img.src = window.URL.createObjectURL(file);
+      img.onload = () => {
+        const width = img.naturalWidth;
+        const height = img.naturalHeight;
+        window.URL.revokeObjectURL(img.src!);
+        resolve(width === height && width >= 300);
+      };
+    });
+  }
+
+  private getBase64(img: File, callback: (img: string) => void): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result!.toString()));
+    reader.readAsDataURL(img);
   }
 
   showConfirm(): void {

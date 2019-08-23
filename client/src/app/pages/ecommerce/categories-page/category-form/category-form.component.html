@@ -27,14 +27,20 @@
           </div>
         </div>
         <div class="col-lg-4">
-          <div class="preview">
-            <img  src="assets/images/photos/4.jpeg">
-          </div>
-          <nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/">
-            <button nz-button>
-              <i nz-icon type="upload"></i><span>Click to Upload</span>
-            </button>
+          <div class="d-flex align-items-center justify-content-center h-100">
+          <nz-upload
+            class="uploader"
+            nzListType="picture-card"
+            [nzShowUploadList]="false"
+            [nzBeforeUpload]="beforeUpload"
+          >
+            <ng-container *ngIf="!imagePreview">
+              <i class="upload-icon" nz-icon [nzType]="loadingImage ? 'loading' : 'plus'"></i>
+              <div class="ant-upload-text">Select image</div>
+            </ng-container>
+            <img *ngIf="imagePreview" [src]="imagePreview" class="w-100" />
           </nz-upload>
+        </div>
         </div>
         <div class="col-lg-12">
           <div class="form-actions">
