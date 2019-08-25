@@ -42,7 +42,7 @@ export class CategoryEffect {
         map(res => {
           return new actions.CreateCategorySuccessAction(res);
         }),
-        catchError(() => of(new actions.GetCategoryFailAction()))
+        catchError(() => of(new actions.CreateCategoryFailAction()))
       )
     )
   );
