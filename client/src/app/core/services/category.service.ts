@@ -17,24 +17,24 @@ export class CategoryService {
   ){}
 
   getAll(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.baseUrl}/api/category`);
+    return this.http.get<Category[]>(`${this.baseUrl}/category`);
   }
 
   getById(id: string): Observable<Category> {
-    return this.http.get<Category>(`${this.baseUrl}/api/category/${id}`);
+    return this.http.get<Category>(`${this.baseUrl}/category/${id}`);
   }
 
   create(data: any): Observable<Category> {
     const formData = this.formDataService.create(data);
-    return this.http.post<Category>(`${this.baseUrl}/api/category`, formData);
+    return this.http.post<Category>(`${this.baseUrl}/category`, formData);
   }
 
   update(data: any): Observable<Category> {
     const formData = this.formDataService.create(data);
-    return this.http.patch<Category>(`${this.baseUrl}/api/category/${data.id}`, formData);
+    return this.http.patch<Category>(`${this.baseUrl}/category/${data.id}`, formData);
   }
 
   delete(id):Observable<any> {
-    return this.http.delete(`${this.baseUrl}/api/category/${id}`);
+    return this.http.delete(`${this.baseUrl}/category/${id}`);
   }
 }

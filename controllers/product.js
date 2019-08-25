@@ -1,6 +1,17 @@
 const Product = require('../models/Product');
 const errorHandler = require('../utils/errorHandler');
 
+module.exports.getAll = async (rq, res) => {
+  try {
+    const products = await Product.find({
+      user: req.user.id
+    });
+    res.status(200).json(products);
+  } catch (error) {
+    errorHandler(res, error);
+  }
+}
+
 module.exports.getByCategoryId = async (req, res) => {
   try {
     const products = await Product.find({
