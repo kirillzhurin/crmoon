@@ -1,6 +1,6 @@
 const express = require('express');
 const passport = require('passport');
-const controller = require('../controllers/position');
+const controller = require('../controllers/product');
 const router = express.Router();
 
 router.get('/:categoryId', passport.authenticate('jwt', { session: false }), controller.getByCategoryId);

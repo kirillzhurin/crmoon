@@ -1,5 +1,5 @@
 const Category = require('../models/Category');
-const Position = require('../models/Position');
+const Product = require('../models/Product');
 const errorHandler = require('../utils/errorHandler');
 
 module.exports.getAll = async (req, res) => {
@@ -24,7 +24,7 @@ module.exports.remove = async (req, res) => {
   const { id } = req.params;
   try {
     await Category.remove({ _id: id });
-    await Position.remove({ category: id });
+    await Product.remove({ category: id });
     res.status(200).json({ id });
   } catch (error) {
     errorHandler(res, error);
