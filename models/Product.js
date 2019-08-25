@@ -10,6 +10,26 @@ const productSchema = new Schema({
     type: Number,
     required: true
   },
+  images: [
+    {
+      imageSrc: {
+        type: String
+      }
+    }
+  ],
+  color: {
+    type: String,
+  },
+  shortDescription: {
+    type: String
+  },
+  fullDescription: {
+    type: String
+  },
+  size: {
+    type: String,
+    enum: ['xs', 's', 'm', 'l', 'xl']
+  },
   category: {
     ref: 'categories',
     type: Schema.Types.ObjectId
