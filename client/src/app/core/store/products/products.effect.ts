@@ -14,7 +14,7 @@ export class ProductEffect {
   loadProducts$: Observable<actions.ProductActions> = this.actions$.pipe(
     ofType(actions.LOAD_PRODUCTS),
     mergeMap((action: actions.LoadProductsAction) =>
-      this.productService.getAll()
+      this.productService.getAll(action.payload)
         .pipe(
           map(res => new actions.LoadProductsSuccessAction(res)),
           catchError(() => of(new actions.LoadProductsFailAction()))
@@ -30,6 +30,20 @@ export class ProductEffect {
         .pipe(
           map(res => new actions.GetProductSuccessAction(res)),
           catchError(() => of(new actions.GetProductFailAction()))
+        )
+    )
+  );
+
+  @Effect()
+  createProduct$: Observable<actions.ProductActions> = this.actions$.pipe(
+    ofType(actions.CREATE_PRODUCT),
+    mergeMap((action: actions.CreateProductAction) =>
+      this.productService.create(action.payload)
+        .pipe(
+          map(res => {
+            return new actions.CreateProductSuccessAction(res);
+          }),
+          catchError(() => of(new actions.CreateProductFailAction()))
         )
     )
   );
@@ -61,11 +75,5 @@ export class ProductEffect {
         )
       )
     )
-  );
-
-  @Effect({ dispatch: false })
-  navigateToProducts$ = this.actions$.pipe(
-    ofType(actions.DELETE_PRODUCT_SUCCESS, actions.CREATE_PRODUCT_SUCCESS),
-    tap(() => this.router.navigate(['/ecommerce/categories']))
   );
 }

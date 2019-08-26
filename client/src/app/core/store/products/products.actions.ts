@@ -1,24 +1,25 @@
 import { Action } from '@ngrx/store';
 import Product from '../../models/product';
 
-export const LOAD_PRODUCTS = '[Product] Loading list of Product from server';
-export const LOAD_PRODUCTS_SUCCESS = '[Product] List of Products are loaded';
-export const LOAD_PRODUCTS_FAIL = '[Product] Products loading failed';
-export const GET_PRODUCT = '[Product] Loading category by id from server';
-export const GET_PRODUCT_SUCCESS = '[Product] Product are loaded successfully';
-export const GET_PRODUCT_FAIL = '[Product] Product loading failed';
-export const UPDATE_PRODUCT = '[Product] Update category data';
-export const UPDATE_PRODUCT_SUCCESS = '[Product] Product data are updated';
-export const UPDATE_PRODUCT_FAIL = '[Product] Product data updaiting failed';
-export const CREATE_PRODUCT = '[Product] Request to add new category';
-export const CREATE_PRODUCT_SUCCESS = '[Product] Request to add new category success';
-export const CREATE_PRODUCT_FAIL = '[Product] Adding new category is failed';
-export const DELETE_PRODUCT = '[Product] Delete category by id from server';
-export const DELETE_PRODUCT_SUCCESS = '[Product] Product data deleted successfully';
-export const DELETE_PRODUCT_FAIL = '[Product] Deleting category is failed';
+export const LOAD_PRODUCTS = '[Products] Loading list of Product from server';
+export const LOAD_PRODUCTS_SUCCESS = '[Products] List of Products are loaded';
+export const LOAD_PRODUCTS_FAIL = '[Products] Products loading failed';
+export const GET_PRODUCT = '[Products] Loading product by id from server';
+export const GET_PRODUCT_SUCCESS = '[Products] Product are loaded successfully';
+export const GET_PRODUCT_FAIL = '[Products] Product loading failed';
+export const UPDATE_PRODUCT = '[Products] Update product data';
+export const UPDATE_PRODUCT_SUCCESS = '[Products] Product data are updated';
+export const UPDATE_PRODUCT_FAIL = '[Products] Product data updaiting failed';
+export const CREATE_PRODUCT = '[Products] Request to add new product';
+export const CREATE_PRODUCT_SUCCESS = '[Products] Request to add new product success';
+export const CREATE_PRODUCT_FAIL = '[Products] Adding new product is failed';
+export const DELETE_PRODUCT = '[Products] Delete product by id from server';
+export const DELETE_PRODUCT_SUCCESS = '[Products] Product data deleted successfully';
+export const DELETE_PRODUCT_FAIL = '[Products] Deleting product is failed';
 
 export class LoadProductsAction implements Action {
   readonly type = LOAD_PRODUCTS;
+  constructor(public payload?: string) {}
 }
 
 export class LoadProductsSuccessAction implements Action {
@@ -45,7 +46,7 @@ export class GetProductFailAction implements Action {
 
 export class CreateProductAction implements Action {
   readonly type = CREATE_PRODUCT;
-  constructor(public payload: { name: string, image?: File}) {}
+  constructor(public payload: Product) {}
 };
 
 export class CreateProductSuccessAction implements Action {

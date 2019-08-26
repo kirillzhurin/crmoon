@@ -1,12 +1,13 @@
 export default interface Product {
   _id?: string;
-  name: string;
+  title: string;
+  sku: string;
   shortDescription?: string;
   fullDescription?: string;
   price: number;
   images: string[];
   color?: string;
-  size?: 'xs' | 's' | 'm' | 'l' | 'xl';
+  size?: string;
   category: string;
   user?: string;
 }

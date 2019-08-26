@@ -1,21 +1,21 @@
 import { Action } from '@ngrx/store';
 import Category from '../../models/category';
 
-export const LOAD_CATEGORIES = '[Category] Loading list of Category from server';
-export const LOAD_CATEGORIES_SUCCESS = '[Category] List of Categories are loaded';
-export const LOAD_CATEGORIES_FAIL = '[Category] Categories loading failed';
-export const GET_CATEGORY = '[Category] Loading category by id from server';
-export const GET_CATEGORY_SUCCESS = '[Category] Category are loaded successfully';
-export const GET_CATEGORY_FAIL = '[Category] Category loading failed';
-export const UPDATE_CATEGORY = '[Category] Update category data';
-export const UPDATE_CATEGORY_SUCCESS = '[Category] Category data are updated';
-export const UPDATE_CATEGORY_FAIL = '[Category] Category data updaiting failed';
-export const CREATE_CATEGORY = '[Category] Request to add new category';
-export const CREATE_CATEGORY_SUCCESS = '[Category] Request to add new category success';
-export const CREATE_CATEGORY_FAIL = '[Category] Adding new category is failed';
-export const DELETE_CATEGORY = '[Category] Delete category by id from server';
-export const DELETE_CATEGORY_SUCCESS = '[Category] Category data deleted successfully';
-export const DELETE_CATEGORY_FAIL = '[Category] Deleting category is failed';
+export const LOAD_CATEGORIES = '[Categories] Loading list of Category from server';
+export const LOAD_CATEGORIES_SUCCESS = '[Categories] List of Categories are loaded';
+export const LOAD_CATEGORIES_FAIL = '[Categories] Categories loading failed';
+export const GET_CATEGORY = '[Categories] Loading category by id from server';
+export const GET_CATEGORY_SUCCESS = '[Categories] Category are loaded successfully';
+export const GET_CATEGORY_FAIL = '[Categories] Category loading failed';
+export const UPDATE_CATEGORY = '[Categories] Update category data';
+export const UPDATE_CATEGORY_SUCCESS = '[Categories] Category data are updated';
+export const UPDATE_CATEGORY_FAIL = '[Categories] Category data updaiting failed';
+export const CREATE_CATEGORY = '[Categories] Request to add new category';
+export const CREATE_CATEGORY_SUCCESS = '[Categories] Request to add new category success';
+export const CREATE_CATEGORY_FAIL = '[Categories] Adding new category is failed';
+export const DELETE_CATEGORY = '[Categories] Delete category by id from server';
+export const DELETE_CATEGORY_SUCCESS = '[Categories] Category data deleted successfully';
+export const DELETE_CATEGORY_FAIL = '[Categories] Deleting category is failed';
 
 export class LoadCategoriesAction implements Action {
   readonly type = LOAD_CATEGORIES;
