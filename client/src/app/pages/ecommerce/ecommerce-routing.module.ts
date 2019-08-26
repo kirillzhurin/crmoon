@@ -4,6 +4,8 @@ import { CategoriesPageComponent } from './categories-page/categories-page.compo
 import { CategoryFormComponent } from './categories-page/category-form/category-form.component';
 import { OrdersPageComponent } from './orders-page/orders-page.component';
 import { ProductsPageComponent } from './products-page/products-page.component';
+import { ProductFormComponent } from './products-page/product-form/product-form.component';
+import { ProductDetailsComponent } from './products-page/product-details/product-details.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,22 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductsPageComponent
+  },
+  {
+    path: 'products/new',
+    component: ProductFormComponent
+  },
+  {
+    path: 'products/new/:categoryId',
+    component: ProductFormComponent
+  },
+  {
+    path: 'products/:id',
+    component: ProductFormComponent
+  },
+  {
+    path: 'product-details/:id',
+    component: ProductDetailsComponent
   },
   {
     path: 'orders',

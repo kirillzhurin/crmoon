@@ -5,15 +5,10 @@
           <a href="javascript: void(0)">Categories</a>
         </div>
         <nav class="cui-docs-dashboard-menu">
-          <ul class="cui-docs-dashboard-menu-list">
-            <li class="cui-docs-dashboard-menu-item">
-              <a href="javascript: void(0)" class="cui-docs-dashboard-menu-link">
-                Category Name
-              </a>
-            </li>
-            <li class="cui-docs-dashboard-menu-item">
-              <a href="javascript: void(0)" class="cui-docs-dashboard-menu-link">
-                Category Name
+          <ul class="cui-docs-dashboard-menu-list" *ngIf="categories$ | async as categories">
+            <li class="cui-docs-dashboard-menu-item" *ngFor="let category of categories">
+              <a href="javascript: void(0)" (click)="selectCategory(category)" class="cui-docs-dashboard-menu-link">
+                {{category.name}}
               </a>
             </li>
           </ul>
@@ -25,62 +20,21 @@
             <input type="text" placeholder="Search products...">
             <i class="lnr lnr-magnifier"></i>
           </div>
-          <a
-            href="javascript: void(0)"
-            class="cui-docs-dashboard-header-link btn btn-sm btn-primary"
-          >
-            Add Product
-          </a>
+          <button nz-button nzType="primary" [routerLink]="['./new']">Add Product</button>
         </div>
-        <article class="cui-docs-dashboard-content">
+        <article class="cui-docs-dashboard-content" *ngIf="activeCategory$ | async as activeCategory">
           <header>
             <h2>
-              <strong>Category Name</strong>
+              <strong>{{activeCategory?.name}}</strong>
             </h2>
-            <p>
-              Learn about Clean Pay, a seamless way to start your company in the U.S. If you
-              have any questions about the process after reading this, contact us at
-            </p>
+            <p>{{activeCategory?.description}}</p>
           </header>
           <section>
-              <div class="row">
-                  <div class="col-xl-4 col-lg-6 col-md-12">
-                    <product-card></product-card>
-                  </div>
-                  <div class="col-xl-4 col-lg-6 col-md-12">
-                    <product-card></product-card>
-                  </div>
-                  <div class="col-xl-4 col-lg-6 col-md-12">
-                    <product-card></product-card>
-                  </div>
-                  <div class="col-xl-4 col-lg-6 col-md-12">
-                    <product-card></product-card>
-                  </div>
-                  <div class="col-xl-4 col-lg-6 col-md-12">
-                    <product-card></product-card>
-                  </div>
-                  <div class="col-xl-4 col-lg-6 col-md-12">
-                    <product-card></product-card>
-                  </div>
-                  <div class="col-xl-4 col-lg-6 col-md-12">
-                    <product-card></product-card>
-                  </div>
-                  <div class="col-xl-4 col-lg-6 col-md-12">
-                    <product-card></product-card>
-                  </div>
-                  <div class="col-xl-4 col-lg-6 col-md-12">
-                    <product-card></product-card>
-                  </div>
-                  <div class="col-xl-4 col-lg-6 col-md-12">
-                    <product-card></product-card>
-                  </div>
-                  <div class="col-xl-4 col-lg-6 col-md-12">
-                    <product-card></product-card>
-                  </div>
-                  <div class="col-xl-4 col-lg-6 col-md-12">
-                    <product-card></product-card>
-                  </div>
+            <div class="row" *ngIf="products$ | async as products">
+                <div class="col-xl-4 col-lg-6 col-md-12" *ngFor="let product of products">
+                  <product-card></product-card>
                 </div>
+              </div>
           </section>
 
         </article>

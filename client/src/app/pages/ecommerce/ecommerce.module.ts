@@ -8,12 +8,16 @@ import { CategoriesPageComponent } from './categories-page/categories-page.compo
 import { CategoryFormComponent } from './categories-page/category-form/category-form.component';
 import { OrdersPageComponent } from './orders-page/orders-page.component';
 import { ProductsPageComponent } from './products-page/products-page.component';
+import { ProductFormComponent } from './products-page/product-form/product-form.component';
+import { ProductDetailsComponent } from './products-page/product-details/product-details.component';
 
 const COMPONENTS = [
   CategoriesPageComponent,
   CategoryFormComponent,
   OrdersPageComponent,
-  ProductsPageComponent
+  ProductsPageComponent,
+  ProductFormComponent,
+  ProductDetailsComponent
 ]
 
 @NgModule({

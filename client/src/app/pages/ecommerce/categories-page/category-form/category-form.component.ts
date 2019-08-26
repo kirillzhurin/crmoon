@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable, of, Observer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { NzModalService, UploadFile, NzMessageService } from 'ng-zorro-antd';
+import { NzModalService, NzMessageService } from 'ng-zorro-antd';
 import Category from 'src/app/core/models/category';
 import { RootState } from 'src/app/core/store';
 import {
