@@ -2,9 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
-  name: {
+  title: {
     type: String,
     required: true
+  },
+  sku: {
+    type: String,
+    required: true,
+    unique: true
   },
   price: {
     type: Number,
@@ -18,7 +23,7 @@ const productSchema = new Schema({
     }
   ],
   color: {
-    type: String,
+    type: String
   },
   shortDescription: {
     type: String
@@ -27,8 +32,7 @@ const productSchema = new Schema({
     type: String
   },
   size: {
-    type: String,
-    enum: ['xs', 's', 'm', 'l', 'xl']
+    type: String
   },
   category: {
     ref: 'categories',

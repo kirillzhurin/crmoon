@@ -32,7 +32,7 @@ module.exports.remove = async (req, res) => {
 }
 
 module.exports.create = async (req, res) => {
-  const category = await new Category({
+  const category = new Category({
     name: req.body.name,
     description: req.body.description,
     imageSrc: req.file ? req.file.path : '',

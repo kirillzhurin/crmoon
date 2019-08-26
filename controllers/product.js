@@ -1,11 +1,14 @@
 const Product = require('../models/Product');
 const errorHandler = require('../utils/errorHandler');
 
-module.exports.getAll = async (rq, res) => {
+module.exports.getAll = async (req, res) => {
   try {
-    const products = await Product.find({
-      user: req.user.id
-    });
+    const options = { user: req.user.id };
+    const { category } = req.query;
+    if (category) {
+      options.category = category;
+    }
+    const products = await Product.find(options);
     res.status(200).json(products);
   } catch (error) {
     errorHandler(res, error);
@@ -26,13 +29,12 @@ module.exports.getByCategoryId = async (req, res) => {
 
 module.exports.create = async (req, res) => {
   const { name, cost, category } = req.body;
+  const product = new Product({ 
+    ...req.body,
+    user: req.user.id
+  });
   try {
-    const product = new Product({ 
-      name, 
-      cost, 
-      category, 
-      user: req.user.id
-    }).save();
+    await product.save();
     res.status(201).json(product);
   } catch (error) {
     errorHandler(res, error);
