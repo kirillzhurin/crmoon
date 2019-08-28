@@ -2,14 +2,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store, select, ActionsSubject } from '@ngrx/store';
-import { NzModalService, NzMessageService } from 'ng-zorro-antd';
+import { NzModalService, NzMessageService, UploadFile } from 'ng-zorro-antd';
 import { Observable, of, Observer, Subject } from 'rxjs';
 import { switchMap, filter, take, takeUntil } from 'rxjs/operators';
+import { pick } from 'lodash';
 import { RootState } from 'src/app/core/store';
+import { FileReaderService } from 'src/app/core/utils';
 import Product from 'src/app/core/models/product';
 import Category from 'src/app/core/models/category';
 import { GetProductAction, CreateProductAction, CREATE_PRODUCT_SUCCESS, selectProductById } from 'src/app/core/store/products';
-import { LoadCategoriesAction, selectAllCategories } from 'src/app/core/store/categories';
+import { LoadCategoriesAction, selectAllCategories, UpdateCategoryAction } from 'src/app/core/store/categories';
 
 @Component({
   selector: 'app-product-form',
@@ -17,25 +19,27 @@ import { LoadCategoriesAction, selectAllCategories } from 'src/app/core/store/ca
   styleUrls: ['./product-form.component.scss']
 })
 export class ProductFormComponent implements OnInit, OnDestroy {
+  private destroy$: Subject<void> = new Subject<void>();
   id: string;
   form: FormGroup;
   product$: Observable<Product>;
   categories$: Observable<Category[]>;
-  private destroy$: Subject<void> = new Subject<void>();
-  formatterDollar(value: number) {
-    return `$ ${value}`;
+  fileList = [];
+  showUploadList = {
+    showPreviewIcon: true,
+    showRemoveIcon: true,
+    hidePreviewIconInNonImage: true
   };
-
-  parserDollar(value: string) {
-    return value.replace('$ ', '');
-  }
+  previewImage: string | undefined = '';
+  previewVisible = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private store: Store<RootState>,
     private messageService: NzMessageService,
-    private actionSubject: ActionsSubject
+    private actionSubject: ActionsSubject,
+    private fileReaderService: FileReaderService
   ) {}
 
   ngOnInit() {
@@ -45,8 +49,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.actionSubject.pipe(
       takeUntil(this.destroy$),
       filter(action => action.type === CREATE_PRODUCT_SUCCESS)
-    ).subscribe(action => {
+    ).subscribe((action: any) => {
       this.messageService.success(CREATE_PRODUCT_SUCCESS);
+      this.router.navigate([`/ecommerce/product-details/${ action.payload._id }`])
     })
 
     this.form = new FormGroup({
@@ -76,9 +81,43 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     });
   }
 
+  formatterDollar(value: number) {
+    return `$ ${value}`;
+  }
+
+  parserDollar(value: string) {
+    return value.replace('$ ', '');
+  }
+
+  beforeUpload = (file: any) => {
+    return new Observable((observer: Observer<boolean>) => {
+      this.fileReaderService.getBase64(file, (result: string) => {
+        file.thumbUrl = result;
+        this.fileList = [...this.fileList, file];
+        observer.complete();
+        return;
+      })
+    });
+  }
+
+  handlePreview = (file: UploadFile) => {
+    this.previewImage =  file.url || file.thumbUrl;
+    this.previewVisible = true;
+  }
+
   onSubmit() {
-    const data = this.form.value
-    this.store.dispatch(new CreateProductAction(data));
+    const data = this.form.value;
+    data.images = this.fileList.map(file => {
+      if (file.status === 'done') {
+        return { url: file.response.path }
+      }
+      return pick(file.url);
+    });
+    if (this.id) {
+      this.store.dispatch(new UpdateCategoryAction(data));
+    } else {
+      this.store.dispatch(new CreateProductAction(data));
+    }
   }
 
   ngOnDestroy() {

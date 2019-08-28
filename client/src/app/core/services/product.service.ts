@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import Product from '../models/product';
+import { FormDataService } from '../utils';
 import { environment } from 'src/environments/environment';
-import { FormDataService } from '../utils/form-data.service';
 
 @Injectable({
   providedIn: 'root'

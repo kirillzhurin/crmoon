@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core'
-import { isUndefined } from 'util';
+import { isUndefined, isArray } from 'util';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormDataService {
-  constructor() {}
 
   create(data: any = {}): FormData {
     const formData = new FormData();
-    Object.keys(data).forEach((key) => {
-      if (!isUndefined(data[key])) {
-        formData.append(key, data[key]);
+    Object.keys(data).map((key) => {
+      if (isUndefined(data[key])) {
+        return;
       }
+      if (isArray(data[key])) {
+        data[key].map((item) => formData.append(key, item));
+        return;
+      }
+      formData.append(key, data[key]);
     });
     return formData;
   }

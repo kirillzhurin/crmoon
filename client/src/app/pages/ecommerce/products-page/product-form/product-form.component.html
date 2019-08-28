@@ -52,7 +52,7 @@
                   </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
-                  <nz-form-label nzFor="price">Price</nz-form-label>
+                  <nz-form-label nzFor="price" nzRequired>Price</nz-form-label>
                   <nz-form-control>
                     <nz-input-number
                       class="w-100"
@@ -105,24 +105,32 @@
           </div>
           <div class="col-lg-4">
             <nz-upload
-              class="height-300 mb-3 d-block"
+              nzAccept="image/*"
+              nzListType="picture-card"
+              nzAction="/api/upload/image"
+              nzName="image"
+              [(nzFileList)]="fileList"
+              [nzShowUploadList]="showUploadList"
+              [nzPreview]="handlePreview"
+              class="height-200 mb-3 d-block"
               nzType="drag"
               [nzMultiple]="true"
-              [nzLimit]="2"
-              nzAction="https://jsonplaceholder.typicode.com/posts/"
             >
               <p class="ant-upload-drag-icon">
                 <i nz-icon type="inbox"></i>
               </p>
               <p class="ant-upload-text">Click or drag file to this area to upload</p>
-              <p class="ant-upload-hint">Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
             </nz-upload>
-            <nz-upload
-              nzAction="https://jsonplaceholder.typicode.com/posts/">
-              <button nz-button>
-                <i nz-icon type="upload"></i><span>Click to Upload</span>
-              </button>
-            </nz-upload>
+            <nz-modal
+              [nzVisible]="previewVisible"
+              [nzContent]="modalContent"
+              [nzFooter]="null"
+              (nzOnCancel)="previewVisible = false"
+            >
+              <ng-template #modalContent>
+                <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+              </ng-template>
+            </nz-modal>
           </div>
           <div class="col-lg-12">
             <div class="form-actions">

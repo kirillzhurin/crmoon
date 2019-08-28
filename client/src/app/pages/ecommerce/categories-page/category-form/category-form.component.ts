@@ -6,6 +6,7 @@ import { Observable, of, Observer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { NzModalService, NzMessageService } from 'ng-zorro-antd';
 import Category from 'src/app/core/models/category';
+import { FileReaderService } from 'src/app/core/utils';
 import { RootState } from 'src/app/core/store';
 import {
   GetCategoryAction,
@@ -33,6 +34,7 @@ export class CategoryFormComponent implements OnInit {
     private route: ActivatedRoute,
     private store: Store<RootState>,
     private modalService: NzModalService,
+    private fileReaderService: FileReaderService,
     private messageService: NzMessageService) { }
 
   ngOnInit() {
@@ -72,6 +74,7 @@ export class CategoryFormComponent implements OnInit {
   }
 
   beforeUpload = (file: File) => {
+    console.log('====',file);
     return new Observable((observer: Observer<boolean>) => {
       const isLt2M = file.size / 1024 / 1024 < 2;
       if (!isLt2M) {
@@ -88,7 +91,7 @@ export class CategoryFormComponent implements OnInit {
         }
         this.imageFile = file;
         this.loadingImage = true;
-        this.getBase64(file, (img: string) => {
+        this.fileReaderService.getBase64(file, (img: string) => {
           this.loadingImage = false;
           this.imagePreview = img;
         })
@@ -108,12 +111,6 @@ export class CategoryFormComponent implements OnInit {
         resolve(width === height && width >= 300);
       };
     });
-  }
-
-  private getBase64(img: File, callback: (img: string) => void): void {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result!.toString()));
-    reader.readAsDataURL(img);
   }
 
   showConfirm(): void {

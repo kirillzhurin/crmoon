@@ -23,10 +23,7 @@ export const selectProductById = createSelector(
 
 export const selectProductsByCategory = createSelector(
   selectAllProducts,
-  (products: Product[], props) => {
-    console.log('>>>>>>', products);
-    return products.filter(product => product.category === props.categoryId);
-  }
+  (products: Product[], props) => products.filter(product => product.category === props.categoryId)
 )
 
 export const isLoadingProducts = createSelector(

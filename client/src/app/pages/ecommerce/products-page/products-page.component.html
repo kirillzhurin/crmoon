@@ -17,13 +17,13 @@
       <div class="cui-docs-dashboard-wrapper">
         <div class="cui-docs-dashboard-header">
           <div class="cui-docs-dashboard-header-search">
-            <input type="text" placeholder="Search products...">
+            <input type="text" (keyup)="onSearch($event)" placeholder="Search products...">
             <i class="lnr lnr-magnifier"></i>
           </div>
           <button nz-button nzType="primary" [routerLink]="['./new']">Add Product</button>
         </div>
-        <article class="cui-docs-dashboard-content" *ngIf="activeCategory$ | async as activeCategory">
-          <header>
+        <article class="cui-docs-dashboard-content" >
+          <header *ngIf="activeCategory$ | async as activeCategory">
             <h2>
               <strong>{{activeCategory?.name}}</strong>
             </h2>
@@ -32,7 +32,7 @@
           <section>
             <div class="row" *ngIf="products$ | async as products">
                 <div class="col-xl-4 col-lg-6 col-md-12" *ngFor="let product of products">
-                  <product-card></product-card>
+                  <product-card [product]="product"></product-card>
                 </div>
               </div>
           </section>
