@@ -31,7 +31,7 @@
             </a>
           </li>
           <li nz-menu-divider *ngIf="item.divider"></li>
-          <li nz-menu-item *ngIf="!item.children && item.url && !item.target" routerLink={{item.url}}
+          <li nz-menu-item *ngIf="!item.children && item.url && !item.target && !item.hidden" routerLink={{item.url}}
             [nzSelected]="item.selected" [nzDisabled]="item.disabled" nz-tooltip nzPlacement="right"
             [nzTitle]="isMenuCollapsed && level === 0 ? tooltipTpl : ''">
             <span [ngStyle]="{'padding-left.px': isMenuCollapsed ? '0' : level * 24}">
@@ -40,7 +40,7 @@
               <span *ngIf="item.pro" class="badge badge-primary badge-collapsed-hidden ml-2">PRO</span>
             </span>
           </li>
-          <li nz-submenu *ngIf="item.children" [nzOpen]="item.open && !isMenuCollapsed">
+          <li nz-submenu *ngIf="item.children && !item.hidden" [nzOpen]="item.open && !isMenuCollapsed">
             <span title [ngStyle]="{'padding-left.px': isMenuCollapsed ? '0' : level * 24}">
               <span class="title">{{item.title}}</span>
               <i *ngIf="item.icon" [ngClass]="[item.icon, 'icon']"></i>

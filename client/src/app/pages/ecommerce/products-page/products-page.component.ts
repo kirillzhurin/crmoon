@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router} from '@angular/router';
 import { Store, select} from '@ngrx/store';
 import { Observable, Subject, combineLatest, BehaviorSubject } from 'rxjs';
 import { switchMap, map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -20,7 +21,8 @@ export class ProductsPageComponent implements OnInit {
   loadingProducts$: Observable<boolean>;
   activeCategory$: Subject<Category> = new Subject();
   searchTerm$: BehaviorSubject<string> = new BehaviorSubject('');
-  constructor(private store: Store<RootState>) { }
+
+  constructor(private store: Store<RootState>, private router: Router) { }
 
   ngOnInit() {
     this.store.dispatch(new LoadCategoriesAction());
@@ -41,5 +43,9 @@ export class ProductsPageComponent implements OnInit {
   selectCategory(category) {
     this.activeCategory$.next(category);
     this.store.dispatch(new LoadProductsAction(category._id));
+  }
+
+  navigateTo(commands) {
+    this.router.navigate(commands);
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store, select, ActionsSubject } from '@ngrx/store';
-import { NzModalService, NzMessageService, UploadFile } from 'ng-zorro-antd';
+import { NzMessageService, UploadFile } from 'ng-zorro-antd';
 import { Observable, of, Observer, Subject } from 'rxjs';
 import { switchMap, filter, take, takeUntil } from 'rxjs/operators';
 import { pick } from 'lodash';
@@ -10,8 +10,15 @@ import { RootState } from 'src/app/core/store';
 import { FileReaderService } from 'src/app/core/utils';
 import Product from 'src/app/core/models/product';
 import Category from 'src/app/core/models/category';
-import { GetProductAction, CreateProductAction, CREATE_PRODUCT_SUCCESS, selectProductById } from 'src/app/core/store/products';
-import { LoadCategoriesAction, selectAllCategories, UpdateCategoryAction } from 'src/app/core/store/categories';
+import {
+  GetProductAction,
+  CreateProductAction,
+  UpdateProductAction,
+  selectProductById,
+  CREATE_PRODUCT_SUCCESS,
+  UPDATE_PRODUCT_SUCCESS
+} from 'src/app/core/store/products';
+import { LoadCategoriesAction, selectAllCategories } from 'src/app/core/store/categories';
 
 @Component({
   selector: 'app-product-form',
@@ -48,9 +55,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
     this.actionSubject.pipe(
       takeUntil(this.destroy$),
-      filter(action => action.type === CREATE_PRODUCT_SUCCESS)
+      filter(action => action.type === CREATE_PRODUCT_SUCCESS || action.type === UPDATE_PRODUCT_SUCCESS)
     ).subscribe((action: any) => {
-      this.messageService.success(CREATE_PRODUCT_SUCCESS);
+      this.messageService.success(action.type);
       this.router.navigate([`/ecommerce/product-details/${ action.payload._id }`])
     })
 
@@ -76,6 +83,10 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       })
     ).subscribe((product: Product) => {
       if (product) {
+        this.fileList = product.images.map((image:any) => {
+          image.uid = image._id;
+          return image
+        });
         this.form.patchValue(product);
       }
     });
@@ -111,10 +122,11 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       if (file.status === 'done') {
         return { url: file.response.path }
       }
-      return pick(file.url);
+      return pick(file, 'url');
     });
     if (this.id) {
-      this.store.dispatch(new UpdateCategoryAction(data));
+      data.id = this.id;
+      this.store.dispatch(new UpdateProductAction(data));
     } else {
       this.store.dispatch(new CreateProductAction(data));
     }

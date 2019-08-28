@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import Product from 'src/app/core/models/product'
 import { environment } from 'src/environments/environment'
 
@@ -9,7 +9,12 @@ import { environment } from 'src/environments/environment'
 })
 export class ProductCardComponent implements OnInit {
   @Input() product: Product;
+  @Output() onClick = new EventEmitter<Product>();
   emptyImage = environment.emptyImage;
   constructor() {}
   ngOnInit() {}
+
+  handleClick() {
+    this.onClick.emit(this.product);
+  }
 }

@@ -29,6 +29,16 @@ export const getLeftMenuData: any[] = [
         url: '/ecommerce/categories',
       },
       {
+        title: 'New Category',
+        url: '/ecommerce/categories/new',
+        hidden: true
+      },
+      {
+        title: 'Edit Category',
+        url: '/ecommerce/categories/[0-9a-z]+',
+        hidden: true
+      },
+      {
         title: 'Products',
         key: 'products',
         url: '/ecommerce/products',
@@ -37,6 +47,21 @@ export const getLeftMenuData: any[] = [
         title: 'Orders',
         key: 'orders',
         url: '/ecommerce/orders',
+      },
+      {
+        title: 'New Product',
+        url: '/ecommerce/products/new',
+        hidden: true
+      },
+      {
+        title: 'Edit Product',
+        url: '/ecommerce/products/[0-9a-z]+',
+        hidden: true
+      },
+      {
+        title: 'Product Details',
+        url: '/ecommerce/product-details/[0-9a-z]+',
+        hidden: true
       }
     ],
   },

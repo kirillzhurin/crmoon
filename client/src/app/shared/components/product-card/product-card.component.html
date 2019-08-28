@@ -6,12 +6,12 @@
     <div class="like">
       <i class="icmn icmn-heart3"></i>
     </div>
-    <a href="javascript: void(0);">
+    <a href="javascript: void(0);" (click)="handleClick();">
       <img src="{{product.images[0]?.url || emptyImage}}">
     </a>
   </div>
   <div class="title">
-    <a href="javascript: void(0);">{{product.title}}</a>
+    <a href="javascript: void(0);" (click)="handleClick();">{{product.title}}</a>
     <div class="price">
       {{product.price}}
       <!-- <div class="oldPrice">{{product.productOldPrice}}</div> -->

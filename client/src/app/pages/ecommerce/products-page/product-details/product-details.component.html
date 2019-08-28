@@ -1,23 +1,24 @@
 <div class="card">
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between align-items-center">
       <div class="utils__title">
         <strong>Product Details</strong>
       </div>
+      <button nz-button nzType="primary" [routerLink]="['/ecommerce/products', id]">Edit</button>
     </div>
     <div class="card-body">
       <div class="row">
         <div class="col-lg-4">
           <div class="cui-product-details-item">
             <div class="cui-product-details-img">
-              <div class="cui-product-details-status">
+              <!-- <div class="cui-product-details-status">
                 <span class="cui-product-details-status-title">New</span>
-              </div>
-              <div class="cui-product-details-like">
-                <i class="icmn-heart"></i>
-              </div>
-              <nz-carousel  #productImagesCarousel [nzEffect]="'fade'" [nzEnableSwipe]="true">
-                <div nz-carousel-content *ngFor="let image of images">
-                  <img [src]="image" class="cui-product-details-img">
+              </div> -->
+              <!-- <div class="cui-product-details-like">
+                <i class="icmn-heart3"></i>
+              </div> -->
+              <nz-carousel  #productImagesCarousel [nzEffect]="'scrollx'" [nzEnableSwipe]="true">
+                <div nz-carousel-content *ngFor="let image of product?.images">
+                  <img draggable="false" [src]="image.url" class="cui-product-details-img">
                 </div>
               </nz-carousel>
             </div>
@@ -44,14 +45,14 @@
             </nz-breadcrumb>
           </div>
           <div class="cui-product-details-sku">
-            SKU: {{sku}}
+            SKU: {{product?.sku}}
             <br>
             <div class="cui-product-details-raiting">
               <nz-rate [ngModel]="rate" nzAllowHalf></nz-rate>
             </div>
           </div>
           <h4 class="cui-product-details-main-title">
-            <strong>{{name}}</strong>
+            <strong>{{product?.title}}</strong>
           </h4>
           <div class="cui-product-details-price">
             ${{price}}

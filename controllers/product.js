@@ -15,6 +15,15 @@ module.exports.getAll = async (req, res) => {
   }
 }
 
+module.exports.getById = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.status(200).json(product);  
+  } catch (error) {
+    errorHandler(res, error);
+  }
+}
+
 module.exports.getByCategoryId = async (req, res) => {
   try {
     const products = await Product.find({
