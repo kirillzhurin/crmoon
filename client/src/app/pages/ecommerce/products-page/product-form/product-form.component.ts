@@ -5,9 +5,11 @@ import { Store, select, ActionsSubject } from '@ngrx/store';
 import { NzMessageService, UploadFile } from 'ng-zorro-antd';
 import { Observable, of, Observer, Subject } from 'rxjs';
 import { switchMap, filter, take, takeUntil } from 'rxjs/operators';
-import { pick } from 'lodash';
+import { pick, capitalize } from 'lodash';
 import { RootState } from 'src/app/core/store';
 import { FileReaderService } from 'src/app/core/utils';
+import SIZES from 'src/app/shared/helpers/sizes';
+import COLORS from 'src/app/shared/helpers/colors';
 import Product from 'src/app/core/models/product';
 import Category from 'src/app/core/models/category';
 import {
@@ -28,6 +30,9 @@ import { LoadCategoriesAction, selectAllCategories } from 'src/app/core/store/ca
 export class ProductFormComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   id: string;
+  sizes = SIZES;
+  colors = COLORS;
+  capitalize = capitalize;
   form: FormGroup;
   product$: Observable<Product>;
   categories$: Observable<Category[]>;
@@ -68,8 +73,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       shortDescription: new FormControl(''),
       fullDescription: new FormControl(''),
       price: new FormControl(1, [Validators.required, Validators.min(0.1)]),
-      color: new FormControl(null),
-      size: new FormControl(null)
+      colors: new FormControl(null),
+      sizes: new FormControl(null)
     });
 
     this.route.params.pipe(

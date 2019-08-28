@@ -22,18 +22,14 @@ const productSchema = new Schema({
       }
     }
   ],
-  color: {
-    type: String
-  },
+  colors: [String],
   shortDescription: {
     type: String
   },
   fullDescription: {
     type: String
   },
-  size: {
-    type: String
-  },
+  sizes: [String],
   category: {
     ref: 'categories',
     type: Schema.Types.ObjectId

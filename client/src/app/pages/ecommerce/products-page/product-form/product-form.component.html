@@ -76,13 +76,8 @@
                 <nz-form-item>
                   <nz-form-label nzFor="colors">Colors</nz-form-label>
                   <nz-form-control>
-                    <nz-select id="colors" formControlName="color" nzAllowClear nzPlaceHolder="Choose product color">
-                      <nz-option nzValue="white" nzLabel="White"></nz-option>
-                      <nz-option nzValue="black" nzLabel="Black"></nz-option>
-                      <nz-option nzValue="grey" nzLabel="Grey"></nz-option>
-                      <nz-option nzValue="blue" nzLabel="Blue"></nz-option>
-                      <nz-option nzValue="red" nzLabel="Red"></nz-option>
-                      <nz-option nzValue="green" nzLabel="Green"></nz-option>
+                    <nz-select nzMode="tags" id="colors" formControlName="colors" nzPlaceHolder="Choose product color">
+                      <nz-option *ngFor="let color of colors" [nzValue]="color" [nzLabel]="capitalize(color)"></nz-option>
                     </nz-select>
                   </nz-form-control>
                 </nz-form-item>
@@ -91,12 +86,8 @@
                 <nz-form-item>
                   <nz-form-label nzFor="size">Size</nz-form-label>
                   <nz-form-control>
-                    <nz-select id="size" formControlName="size" nzAllowClear nzPlaceHolder="Choose product size">
-                      <nz-option nzValue="xs" nzLabel="Extra small"></nz-option>
-                      <nz-option nzValue="s" nzLabel="Small"></nz-option>
-                      <nz-option nzValue="m" nzLabel="Middle"></nz-option>
-                      <nz-option nzValue="l" nzLabel="Large"></nz-option>
-                      <nz-option nzValue="xl" nzLabel="Extra large"></nz-option>
+                    <nz-select nzMode="tags" id="size" formControlName="sizes" nzPlaceHolder="Choose product size">
+                      <nz-option *ngFor="let size of sizes" [nzValue]="size.key" [nzLabel]="size.text"></nz-option>
                     </nz-select>
                   </nz-form-control>
                 </nz-form-item>

@@ -74,7 +74,6 @@ export class CategoryFormComponent implements OnInit {
   }
 
   beforeUpload = (file: File) => {
-    console.log('====',file);
     return new Observable((observer: Observer<boolean>) => {
       const isLt2M = file.size / 1024 / 1024 < 2;
       if (!isLt2M) {

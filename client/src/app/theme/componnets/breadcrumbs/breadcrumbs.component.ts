@@ -27,18 +27,15 @@ export class BreadcrumbsComponent {
     this.router.events
       .pipe(filter(event => event instanceof NavigationStart))
       .subscribe((event: NavigationStart) => {
-        console.log(event);
         this.generateBreadcrumbs(event.url ? event.url : null)
       })
   }
 
   generateBreadcrumbs(event: any) {
     this.breadcrumbs = this.getPath(this.menuData, event).reverse()
-    console.log(this.breadcrumbs);
   }
 
   getPath(data: any[], url: string, parents = []) {
-    console.log('URL', url);
     const items = reduce(
       data,
       (result: any, entry: any) => {

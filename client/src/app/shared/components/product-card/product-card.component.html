@@ -18,9 +18,7 @@
     </div>
   </div>
   <div class="sizes">
-    <span nzTitle="Size S" nzPlacement="top" nz-tooltip>S</span>
-    <span nzTitle="Size M" nzPlacement="top" nz-tooltip>M</span>
-    <span nzTitle="Size XL" nzPlacement="top" nz-tooltip>XL</span>
+    <span *ngFor="let size of product.sizes" [nzTitle]="sizes[size].text" class="text-uppercase" nzPlacement="top" nz-tooltip>{{size}}</span>
   </div>
   <div class="descr">
     {{product.shortDescription}}
