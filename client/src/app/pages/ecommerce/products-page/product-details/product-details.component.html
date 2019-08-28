@@ -55,12 +55,12 @@
             <strong>{{product?.title}}</strong>
           </h4>
           <div class="cui-product-details-price">
-            ${{price}}
+            ${{product.price}}
             <div *ngIf="oldPrice" class="cui-product-details-price-before">${{oldPrice}}</div>
           </div>
           <hr>
           <div class="mb-1 cui-product-details-descr">
-            <p>{{shortDescr}}</p>
+            <p>{{product.shortDescription}}</p>
           </div>
           <div class="row">
             <div class="col-lg-6">
@@ -97,14 +97,14 @@
               <i nz-icon type="shopping-cart" theme="outline"></i>
               Buy now
             </button>
-            <a href="javascript: void(0);" class="btn btn-link">
-              <i class="icmn-heart mr-1"></i>
+            <!-- <a href="javascript: void(0);" class="btn btn-link">
+              <i class="icmn-heart3 mr-1"></i>
               Add to Wishlist
             </a>
             <a href="javascript: void(0);" class="btn btn-link">
               <i class="icmn-stats-bars mr-1"></i>
               Add to Compare
-            </a>
+            </a> -->
           </div>
           <div class="cui-product-details-info">
             <nz-tabset>
@@ -115,7 +115,7 @@
                 </div>
               </nz-tab>
               <nz-tab nzTitle="Description">
-                <p>{{description}}</p>
+                <p>{{product.fullDescription}}</p>
               </nz-tab>
             </nz-tabset>
           </div>

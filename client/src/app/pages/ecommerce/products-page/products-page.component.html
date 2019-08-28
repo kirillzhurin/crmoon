@@ -5,9 +5,9 @@
           <a href="javascript: void(0)">Categories</a>
         </div>
         <nav class="cui-docs-dashboard-menu">
-          <ul class="cui-docs-dashboard-menu-list" *ngIf="categories$ | async as categories">
-            <li class="cui-docs-dashboard-menu-item" *ngFor="let category of categories">
-              <a href="javascript: void(0)" (click)="selectCategory(category)" class="cui-docs-dashboard-menu-link">
+          <ul class="cui-docs-dashboard-menu-list" >
+            <li class="cui-docs-dashboard-menu-item" *ngFor="let category of categories$ | async">
+              <a href="javascript: void(0)" [ngClass]="{active: category._id == (activeCategory$ | async)?._id}" (click)="selectCategory(category)" class="cui-docs-dashboard-menu-link">
                 {{category.name}}
               </a>
             </li>
@@ -22,7 +22,7 @@
           </div>
           <button nz-button nzType="primary" [routerLink]="['./new']">Add Product</button>
         </div>
-        <article class="cui-docs-dashboard-content" >
+        <article class="cui-docs-dashboard-content">
           <header *ngIf="activeCategory$ | async as activeCategory">
             <h2>
               <strong>{{activeCategory?.name}}</strong>
