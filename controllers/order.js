@@ -1,7 +1,7 @@
 const Order = require('../models/Order');
 const errorHandler = require('../utils/errorHandler');
 
-module.exports.getAll =  async (req, res) => {
+module.exports.getAll = async (req, res) => {
   const { offset, limit, start, end, order } = req.query;
   const query = {
     user: req.user.id

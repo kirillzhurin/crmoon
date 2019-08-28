@@ -28,7 +28,6 @@ module.exports.getByCategoryId = async (req, res) => {
 }
 
 module.exports.create = async (req, res) => {
-  const { name, cost, category } = req.body;
   const product = new Product({ 
     ...req.body,
     user: req.user.id

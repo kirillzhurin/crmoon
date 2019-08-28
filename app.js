@@ -5,6 +5,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const authRoutes = require('./routes/auth');
+const uploadRoutes = require('./routes/upload');
 const analyticsRoutes = require('./routes/analytics');
 const categoryRoutes = require('./routes/category');
 const orderRoutes = require('./routes/order');
@@ -27,6 +28,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/upload', uploadRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/order', orderRoutes);
