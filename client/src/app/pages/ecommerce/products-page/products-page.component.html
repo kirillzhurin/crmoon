@@ -29,14 +29,16 @@
             </h2>
             <p>{{activeCategory?.description}}</p>
           </header>
-          <section>
-            <div class="row" *ngIf="products$ | async as products">
-                <div class="col-xl-4 col-lg-6 col-md-12" *ngFor="let product of products">
-                  <product-card [product]="product" (onClick)="navigateTo(['/ecommerce/product-details/', product._id])"></product-card>
-                </div>
+          <section *ngIf="products$ | async as products">
+            <div class="row" *ngIf="products.length; else emptyProducts">
+              <div class="col-xl-4 col-lg-6 col-md-12" *ngFor="let product of products">
+                <product-card [product]="product" (onClick)="navigateTo(['/ecommerce/product-details/', product._id])"></product-card>
               </div>
+            </div>
+            <ng-template #emptyProducts>
+                <nz-empty></nz-empty>
+            </ng-template>
           </section>
-
         </article>
       </div>
     </div>

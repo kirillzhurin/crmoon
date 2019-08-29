@@ -1,6 +1,7 @@
 <div class="card">
-    <div class="card-header">
+    <div class="card-header d-flex justify-content-between align-items-center">
       <div class="utils__title"><strong>{{id ? 'Edit' : 'New'}} Product</strong></div>
+      <button nz-button (click)="showConfirm()" nzType="danger" *ngIf="id">Delete</button>
     </div>
     <div class="card-body">
       <form [formGroup]="form" nz-form nzLayout="vertical" (ngSubmit)="onSubmit()">

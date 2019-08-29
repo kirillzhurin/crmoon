@@ -25,25 +25,7 @@
           </div>
         </div>
         <div class="col-lg-8">
-          <div class="cui-product-details-breadcrumbs">
-            <nz-breadcrumb [nzSeparator]="''">
-              <nz-breadcrumb-item class="cui-product-details-breadcrumb-item-wrap">
-                <span class="cui-product-details-breadcrumb-item">
-                  <a href="javascript: void(0);">Catalog</a>
-                </span>
-              </nz-breadcrumb-item>
-              <nz-breadcrumb-item class="cui-product-details-breadcrumb-item-wrap">
-                <span class="cui-product-details-breadcrumb-item">
-                  <a href="javascript: void(0);">Chairs</a>
-                </span>
-              </nz-breadcrumb-item>
-              <nz-breadcrumb-item class="cui-product-details-breadcrumb-item-wrap">
-                <span class="cui-product-details-breadcrumb-item">
-                  <a href="javascript: void(0);">White</a>
-                </span>
-              </nz-breadcrumb-item>
-            </nz-breadcrumb>
-          </div>
+
           <div class="cui-product-details-sku">
             SKU: {{product?.sku}}
             <br>
@@ -56,23 +38,17 @@
           </h4>
           <div class="cui-product-details-price">
             ${{product.price}}
-            <div *ngIf="oldPrice" class="cui-product-details-price-before">${{oldPrice}}</div>
+            <div *ngIf="product.oldPrice" class="cui-product-details-price-before">${{product.oldPrice}}</div>
           </div>
           <hr>
-          <div class="mb-1 cui-product-details-descr">
-            <p>{{product.shortDescription}}</p>
-          </div>
           <div class="row">
             <div class="col-lg-6">
               <div class="cui-product-details-option-title">
                 Color
               </div>
               <div class="cui-product-details-option">
-                <nz-select style="width: 120px;" [(ngModel)]="colorValue" [nzSize]="'small'">
-                  <nz-option nzValue="Red" nzLabel="Red"></nz-option>
-                  <nz-option nzValue="Black" nzLabel="Black"></nz-option>
-                  <nz-option nzValue="Cyan" nzLabel="Cyan"></nz-option>
-                  <nz-option nzValue="Blue" nzLabel="Blue"></nz-option>
+                <nz-select style="width: 120px;" [nzSize]="'small'">
+                  <nz-option *ngFor="let color of product?.colors" [nzValue]="color" [nzLabel]="color"></nz-option>
                 </nz-select>
               </div>
               <div class="cui-product-details-option-title">
@@ -91,33 +67,22 @@
               </div>
             </div>
           </div>
+          <div class="cui-product-details-info">
+              <nz-tabset>
+                <nz-tab nzTitle="Information">
+                  <p>{{product?.shortDescription}}</p>
+                </nz-tab>
+                <nz-tab nzTitle="Full Description">
+                  <p>{{product?.fullDescription}}</p>
+                </nz-tab>
+              </nz-tabset>
+            </div>
           <hr>
           <div class="cui-product-details-controls">
-            <button nz-button nzType="primary" [nzSize]="'large'">
+            <button nz-button nzType="primary" nzSize="large">
               <i nz-icon type="shopping-cart" theme="outline"></i>
               Buy now
             </button>
-            <!-- <a href="javascript: void(0);" class="btn btn-link">
-              <i class="icmn-heart3 mr-1"></i>
-              Add to Wishlist
-            </a>
-            <a href="javascript: void(0);" class="btn btn-link">
-              <i class="icmn-stats-bars mr-1"></i>
-              Add to Compare
-            </a> -->
-          </div>
-          <div class="cui-product-details-info">
-            <nz-tabset>
-              <nz-tab nzTitle="Information">
-                <div class="mb-1" *ngFor="let property of properties">
-                  <strong class="mr-1">{{property.name}}: </strong>
-                  {{property.value}}
-                </div>
-              </nz-tab>
-              <nz-tab nzTitle="Description">
-                <p>{{product.fullDescription}}</p>
-              </nz-tab>
-            </nz-tabset>
           </div>
         </div>
       </div>

@@ -53,7 +53,7 @@ module.exports.remove = async (req, res) => {
   const { id } = req.params;
   try {
     await Product.remove({ _id: id });
-    res.send(id);
+    res.status(200).json({ id });
   } catch (error) {
     errorHandler(res, error);
   } 

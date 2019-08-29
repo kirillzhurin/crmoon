@@ -28,7 +28,7 @@ export class ProductsPageComponent implements OnInit, AfterViewInit {
     this.store.dispatch(new LoadCategoriesAction());
     this.categories$ = this.store.select(selectAllCategories);
 
-    this.products$ = combineLatest(this.activeCategory$.pipe(skipWhile(activeCategory => !!activeCategory)), this.searchTerm$.pipe(debounceTime(300), distinctUntilChanged())).pipe(
+    this.products$ = combineLatest(this.activeCategory$.pipe(skipWhile(activeCategory => !activeCategory)), this.searchTerm$.pipe(debounceTime(300), distinctUntilChanged())).pipe(
       switchMap(([ activeCategory, term ]) => {
         return this.store.pipe(
           select(selectProductsByCategory, {categoryId: activeCategory._id}),

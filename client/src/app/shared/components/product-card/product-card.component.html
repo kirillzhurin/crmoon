@@ -3,9 +3,9 @@
     <div class="status" *ngIf="product?.productStatus === 'new'">
       <span class="statusTitle">New</span>
     </div>
-    <div class="like">
-      <i class="icmn icmn-heart3"></i>
-    </div>
+    <!-- <div class=cart>
+      <i class="icmn icmn-cart"></i>
+    </div> -->
     <a href="javascript: void(0);" (click)="handleClick();">
       <img src="{{product.images[0]?.url || emptyImage}}">
     </a>

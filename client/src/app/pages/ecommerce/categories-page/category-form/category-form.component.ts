@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
+import { Store, select, ActionsSubject } from '@ngrx/store';
 import { Observable, of, Observer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { NzModalService, NzMessageService } from 'ng-zorro-antd';
@@ -35,7 +35,8 @@ export class CategoryFormComponent implements OnInit {
     private store: Store<RootState>,
     private modalService: NzModalService,
     private fileReaderService: FileReaderService,
-    private messageService: NzMessageService) { }
+    private messageService: NzMessageService,
+    private actionsSubject: ActionsSubject) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -114,8 +115,8 @@ export class CategoryFormComponent implements OnInit {
 
   showConfirm(): void {
     this.modalService.confirm({
-      nzTitle: '<i>Do you Want to delete these items?</i>',
-      nzContent: '<b>Some descriptions</b>',
+      nzTitle: '<i>Confirmation</i>',
+      nzContent: 'Do you Want to delete these category?',
       nzOnOk: () => this.store.dispatch(new DeleteCategoryAction(this.id))
     });
   }

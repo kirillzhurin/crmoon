@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store, select, ActionsSubject } from '@ngrx/store';
-import { NzMessageService, UploadFile } from 'ng-zorro-antd';
+import { NzModalService, NzMessageService, UploadFile } from 'ng-zorro-antd';
 import { Observable, of, Observer, Subject } from 'rxjs';
 import { switchMap, filter, take, takeUntil } from 'rxjs/operators';
 import { pick, capitalize } from 'lodash';
@@ -16,9 +16,11 @@ import {
   GetProductAction,
   CreateProductAction,
   UpdateProductAction,
+  DeleteProductAction,
   selectProductById,
   CREATE_PRODUCT_SUCCESS,
-  UPDATE_PRODUCT_SUCCESS
+  UPDATE_PRODUCT_SUCCESS,
+  DELETE_PRODUCT_SUCCESS
 } from 'src/app/core/store/products';
 import { LoadCategoriesAction, selectAllCategories } from 'src/app/core/store/categories';
 
@@ -51,7 +53,8 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     private store: Store<RootState>,
     private messageService: NzMessageService,
     private actionSubject: ActionsSubject,
-    private fileReaderService: FileReaderService
+    private fileReaderService: FileReaderService,
+    private modalService: NzModalService
   ) {}
 
   ngOnInit() {
@@ -64,6 +67,14 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     ).subscribe((action: any) => {
       this.messageService.success(action.type);
       this.router.navigate([`/ecommerce/product-details/${ action.payload._id }`])
+    });
+
+    this.actionSubject.pipe(
+      takeUntil(this.destroy$),
+      filter(action => action.type === DELETE_PRODUCT_SUCCESS)
+    ).subscribe((action: any) => {
+      this.messageService.success(action.type);
+      this.router.navigate([`/ecommerce/products`])
     })
 
     this.form = new FormGroup({
@@ -135,6 +146,14 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     } else {
       this.store.dispatch(new CreateProductAction(data));
     }
+  }
+
+  showConfirm(): void {
+    this.modalService.confirm({
+      nzTitle: '<i>Confirmation</i>',
+      nzContent: 'Do you Want to delete these product?',
+      nzOnOk: () => this.store.dispatch(new DeleteProductAction(this.id))
+    });
   }
 
   ngOnDestroy() {
