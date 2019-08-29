@@ -10,6 +10,7 @@ import { OrdersPageComponent } from './orders-page/orders-page.component';
 import { ProductsPageComponent } from './products-page/products-page.component';
 import { ProductFormComponent } from './products-page/product-form/product-form.component';
 import { ProductDetailsComponent } from './products-page/product-details/product-details.component';
+import { CartPageComponent } from './cart-page/cart-page.component';
 
 const COMPONENTS = [
   CategoriesPageComponent,
@@ -17,7 +18,8 @@ const COMPONENTS = [
   OrdersPageComponent,
   ProductsPageComponent,
   ProductFormComponent,
-  ProductDetailsComponent
+  ProductDetailsComponent,
+  CartPageComponent
 ]
 
 @NgModule({

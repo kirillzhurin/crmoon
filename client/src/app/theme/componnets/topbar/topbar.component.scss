@@ -12,3 +12,15 @@
   flex-wrap: nowrap;
   align-items: center;
 }
+
+.cart {
+  background-color: $gray-border;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

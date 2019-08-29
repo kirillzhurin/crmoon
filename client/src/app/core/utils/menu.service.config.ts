@@ -13,10 +13,9 @@ export const getLeftMenuData: any[] = [
     url: '/analytics',
   },
   {
-    title: 'History',
-    key: 'history',
-    icon: 'icmn icmn-history',
-    url: '/history',
+    title: 'Profile',
+    url: '/profile',
+    hidden: true
   },
   {
     title: 'eCommerce',
@@ -59,6 +58,11 @@ export const getLeftMenuData: any[] = [
         hidden: true
       },
       {
+        title: 'Shopping Cart',
+        url: '/ecommerce/cart',
+        hidden: true
+      },
+      {
         title: 'Product Details',
         url: '/ecommerce/product-details/[0-9a-z]+',
         hidden: true
@@ -94,11 +98,6 @@ export const getTopMenuData: any[] = [
         title: 'Analytics',
         key: 'analytics',
         url: '/analytics',
-      },
-      {
-        title: 'History',
-        key: 'history',
-        url: '/history',
       },
       {
         title: 'Add Order',

@@ -10,7 +10,7 @@ import {
   RegisterPageComponent,
   DashboardPageComponent,
   AnalyticsPageComponent,
-  HistoryPageComponent
+  ProfilePageComponent
 } from './pages';
 
 const COMPONENTS = [
@@ -18,7 +18,7 @@ const COMPONENTS = [
   RegisterPageComponent,
   DashboardPageComponent,
   AnalyticsPageComponent,
-  HistoryPageComponent
+  ProfilePageComponent
 ];
 
 const routes: Routes = [
@@ -29,7 +29,7 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardPageComponent },
       { path: 'analytics', component: AnalyticsPageComponent },
-      { path: 'history', component: HistoryPageComponent },
+      { path: 'profile', component: ProfilePageComponent },
       { path: 'ecommerce', loadChildren: () => import('./pages/ecommerce/ecommerce.module').then(m => m.EcommerceModule) },
     ]
   },

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CategoriesPageComponent } from './categories-page/categories-page.component';
+import { CartPageComponent } from './cart-page/cart-page.component';
 import { CategoryFormComponent } from './categories-page/category-form/category-form.component';
 import { OrdersPageComponent } from './orders-page/orders-page.component';
 import { ProductsPageComponent } from './products-page/products-page.component';
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'categories/:id',
     component: CategoryFormComponent
+  },
+  {
+    path: 'cart',
+    component: CartPageComponent
   },
   {
     path: 'products',
