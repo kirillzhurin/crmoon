@@ -22,6 +22,7 @@ const COMPONENTS = [
 ];
 
 const routes: Routes = [
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
     path: '',
     component: MainLayoutComponent,
@@ -41,7 +42,6 @@ const routes: Routes = [
       { path: 'register', component: RegisterPageComponent}
     ]
   },
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' }
 ];
 @NgModule({
