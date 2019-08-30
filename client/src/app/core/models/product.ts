@@ -6,8 +6,8 @@ export default interface Product {
   fullDescription?: string;
   price: number;
   images: string[];
-  color?: string;
-  size?: string;
+  colors?: string;
+  sizes?: string;
   category: string;
   user?: string;
 }
