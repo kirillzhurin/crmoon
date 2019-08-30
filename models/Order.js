@@ -12,13 +12,19 @@ const ordersSchema = new Schema({
   },
   list: [
     {
-      name: {
+      title: {
+        type: String
+      },
+      color: {
+        type: String
+      },
+      size: {
         type: String
       },
       quantity: {
         type: Number
       },
-      cost: {
+      price: {
         type: Number
       }
     }

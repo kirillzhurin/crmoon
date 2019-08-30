@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { values } from 'lodash';
+import { capitalize, omit } from 'lodash';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, skipWhile } from 'rxjs/operators';
 import Product from 'src/app/core/models/product';
+import Position from 'src/app/core/models/position';
 import { RootState } from 'src/app/core/store';
 import { GetProductAction, selectProductById } from 'src/app/core/store/products';
-
-declare var require: any
-const data: any = require('./data.json')
+import { AddPositionAction } from 'src/app/core/store/cart';
 
 @Component({
   selector: 'app-product-details',
@@ -17,19 +16,11 @@ const data: any = require('./data.json')
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
-  product: Product;
   id: string;
-
-  images = data.images
-  sku = data.sku
-  name = data.name
-  rate = data.rate
-  price = data.price
-  oldPrice = data.oldPrice
-  shortDescr = data.shortDescr
-  description = data.description
-  properties = data.properties
-  colorValue = 'Red'
+  product: Product;
+  color: string;
+  size: string;
+  capitalize = capitalize;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,8 +35,22 @@ export class ProductDetailsComponent implements OnInit {
         this.store.dispatch(new GetProductAction(id));
         return this.store.pipe(select(selectProductById, { id }));
       })
-    )
-    .subscribe(product => this.product = product);
+    ).pipe(skipWhile(product => !product))
+    .subscribe((product: Product) =>  {
+      this.product = product;
+      this.color = product.colors ? product.colors[0] : null;
+      this.size = product.sizes ? product.sizes[0] : null;
+    });
   }
 
+  addToCart(product: Product) {
+    let position: Position = {
+      ...omit(product, ['colors', 'sizes']),
+      color: this.color,
+      size: this.size,
+      quantity: 1
+    }
+
+    this.store.dispatch(new AddPositionAction(position));
+  }
 }

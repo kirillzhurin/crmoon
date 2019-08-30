@@ -29,6 +29,7 @@ export class LoadCategoriesSuccessAction implements Action {
 export class LoadCategoriesFailAction implements Action {
   readonly type = LOAD_CATEGORIES_FAIL;
 }
+
 export class GetCategoryAction implements Action {
   readonly type = GET_CATEGORY;
   constructor(public payload: string) {}

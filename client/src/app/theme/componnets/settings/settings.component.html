@@ -1,7 +1,7 @@
 <nz-drawer [nzClosable]="true" [nzVisible]="isSettingsOpen" nzPlacement="right" nzTitle="UI Settings" (nzOnClose)="close()">
   <div class="description">
     This component "Settings" gives possibility to construct custom blocks with any widgets, components and elements
-    inside, like this theme settings
+    inside
   </div>
   <div class="item">
     <nz-switch [(ngModel)]="isMenuTop" (ngModelChange)="settingChange($event, 'isMenuTop')"></nz-switch>

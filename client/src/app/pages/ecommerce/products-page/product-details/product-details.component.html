@@ -10,12 +10,6 @@
         <div class="col-lg-4">
           <div class="cui-product-details-item">
             <div class="cui-product-details-img">
-              <!-- <div class="cui-product-details-status">
-                <span class="cui-product-details-status-title">New</span>
-              </div> -->
-              <!-- <div class="cui-product-details-like">
-                <i class="icmn-heart3"></i>
-              </div> -->
               <nz-carousel  #productImagesCarousel [nzEffect]="'scrollx'" [nzEnableSwipe]="true">
                 <div nz-carousel-content *ngFor="let image of product?.images">
                   <img draggable="false" [src]="image.url" class="cui-product-details-img">
@@ -25,21 +19,9 @@
           </div>
         </div>
         <div class="col-lg-8">
-
-          <div class="cui-product-details-sku">
-            SKU: {{product?.sku}}
-            <br>
-            <div class="cui-product-details-raiting">
-              <nz-rate [ngModel]="rate" nzAllowHalf></nz-rate>
-            </div>
-          </div>
-          <h4 class="cui-product-details-main-title">
-            <strong>{{product?.title}}</strong>
-          </h4>
-          <div class="cui-product-details-price">
-            ${{product.price}}
-            <div *ngIf="product.oldPrice" class="cui-product-details-price-before">${{product.oldPrice}}</div>
-          </div>
+          <h4 class="cui-product-details-main-title"><strong>{{product?.title}}</strong></h4>
+          <div>SKU: {{product?.sku}}</div>
+          <div class="cui-product-details-price">${{product?.price}}</div>
           <hr>
           <div class="row">
             <div class="col-lg-6">
@@ -47,23 +29,17 @@
                 Color
               </div>
               <div class="cui-product-details-option">
-                <nz-select style="width: 120px;" [nzSize]="'small'">
-                  <nz-option *ngFor="let color of product?.colors" [nzValue]="color" [nzLabel]="color"></nz-option>
+                <nz-select [(ngModel)]="color" style="width: 120px;" [nzSize]="'small'">
+                  <nz-option *ngFor="let color of product?.colors" [nzValue]="color" [nzLabel]="capitalize(color)"></nz-option>
                 </nz-select>
               </div>
               <div class="cui-product-details-option-title">
                 Sizes
               </div>
-              <div class="cui-product-details-sizes">
-                <button nzTitle="Size S" nzPlacement="top" nz-button nz-tooltip>
-                  <span>S</span>
-                </button>
-                <button nzTitle="Size M" nzPlacement="top" nz-button nz-tooltip>
-                  <span>M</span>
-                </button>
-                <button nzTitle="Size XL" nzPlacement="top" nz-button nz-tooltip>
-                  <span>XL</span>
-                </button>
+              <div class="cui-product-details-option">
+                <nz-radio-group nzSize="small" [(ngModel)]="size">
+                  <label nz-tooltip  [nzTitle]="" nzPlacement="top" class="text-uppercase" nz-radio-button *ngFor="let size of product?.sizes" [nzValue]="size">{{size}}</label>
+                </nz-radio-group>
               </div>
             </div>
           </div>
@@ -79,7 +55,7 @@
             </div>
           <hr>
           <div class="cui-product-details-controls">
-            <button nz-button nzType="primary" nzSize="large">
+            <button nz-button nzType="primary" nzSize="large" (click)="addToCart(product)">
               <i nz-icon type="shopping-cart" theme="outline"></i>
               Buy now
             </button>
