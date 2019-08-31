@@ -24,3 +24,8 @@ export const selectCountPositions = createSelector(
   selectAllPositions,
   (positions) => positions.reduce((count, position) => count += +position.quantity, 0)
 );
+
+export const selectTotalPrice = createSelector(
+  selectAllPositions,
+  (positions) => positions.reduce((total, position) => total += +position.quantity * +position.price, 0)
+);
