@@ -9,6 +9,8 @@ import { environment } from '../../environments/environment' // Angular CLI envi
 import { reducers, metaReducers } from './store';
 import { CategoryEffect } from './store/categories';
 import { ProductEffect } from './store/products';
+import { OrdersEffect } from './store/orders';
+import { CartEffect } from './store/cart';
 
 const PROVIDERS = [
   ...NbAuthModule.forRoot({
@@ -48,7 +50,7 @@ const PROVIDERS = [
   imports: [
     CommonModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([CategoryEffect, ProductEffect]),
+    EffectsModule.forRoot([CategoryEffect, ProductEffect, OrdersEffect, CartEffect]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   exports: [

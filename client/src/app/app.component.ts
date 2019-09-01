@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { RootState } from './core/store'
 import * as settingsActions from './core/store/settings/settings.actions'
-import { SyncLocalStorageAction } from './core/store/cart';
+import { SyncLocalStorageStartAction } from './core/store/cart';
 
 declare var window;
 
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   constructor(private store: Store<RootState>) {}
 
   ngOnInit() {
-    this.store.dispatch(new SyncLocalStorageAction);
+    this.store.dispatch(new SyncLocalStorageStartAction);
 
     // detecting & set mobile/tablet/desktop viewports
     const setViewPort = (isMobileView: any = false, isTabletView: any = false) => {

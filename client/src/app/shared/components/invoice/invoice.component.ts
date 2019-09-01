@@ -14,8 +14,8 @@ export class InvoiceComponent implements OnInit {
   senderPhone = '(123) 456-7890';
   senderFax = '800-692-7753';
   invoiceNumber = `CRM${(~~(Math.random() * 1e8)).toString(16)}`;
-  invoiceDueDate = format(new Date(), 'MM dd, yyyy')
-  invoiceDate = format(addDays(new Date(), 5), 'MM dd, yyyy')
+  invoiceDate = format(new Date(), 'MM dd, yyyy');
+  invoiceDueDate = format(addDays(new Date(), 5), 'MM dd, yyyy');
 
   @Input() data: any = {}
   constructor() {}

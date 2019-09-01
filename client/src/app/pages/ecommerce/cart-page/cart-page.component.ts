@@ -13,6 +13,7 @@ import {
   CreateOrderAction
 } from 'src/app/core/store/orders'
 import Position from 'src/app/core/models/position';
+import Order from 'src/app/core/models/order';
 declare var require: any
 const data: any = require('./data.json')
 
@@ -71,7 +72,10 @@ export class CartPageComponent implements OnInit {
   }
 
   done(): void {
-    //this.store.dispatch(CreateOrderAction())
+    const order:Order = {
+      list: this.invoiceData.positions
+    };
+    this.store.dispatch(new CreateOrderAction(order));
   }
 
   getInvoiceData(positions, total) {

@@ -41,12 +41,13 @@ module.exports.create = async (req, res) => {
   const user = req.user.id;
   try {
     const lastOrder = await Order.findOne({ user }).sort({ date: -1 });
-    const maxOrder = lastOredr ? lastOrder.order + 1 : 0
-    const order = await new Order({
+    const maxOrder = lastOrder ? lastOrder.order + 1 : 0
+    const order =  new Order({
       list,
       user,
       order: maxOrder
-    }).save();
+    });
+    await order.save();
     res.status(201).json(order);
   } catch (error) {
     errorHandler(res, error);

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { mergeMap, map, catchError, tap } from 'rxjs/operators';
-import { CategoryService} from '../../services/category.service';
+import { CategoryService } from '../../services/category.service';
 import * as actions from './categories.actions';
 
 @Injectable()

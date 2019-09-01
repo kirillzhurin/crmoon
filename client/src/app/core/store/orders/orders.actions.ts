@@ -26,7 +26,7 @@ export class LoadOrdersFailAction implements Action {
 
 export class CreateOrderAction implements Action {
   readonly type = CREATE_ORDER;
-  constructor(public payload: { name: string, image?: File}) {}
+  constructor(public payload: Order) {}
 };
 
 export class CreateOrderSuccessAction implements Action {

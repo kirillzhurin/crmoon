@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store'
 import { State, adapter } from './cart.state';
 
-const selectCartState = createFeatureSelector<State>('cart');
+export const selectCartState = createFeatureSelector<State>('cart');
 
 export const { selectIds, selectAll, selectEntities, selectTotal } = adapter.getSelectors();
 
@@ -16,7 +16,7 @@ export const selectPositionEntities = createSelector(
 );
 
 export const selectPositionById = createSelector(
-  selectEntities,
+  selectPositionEntities,
   (entities, props) => entities[props.id]
 );
 
