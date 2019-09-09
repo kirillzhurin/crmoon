@@ -43,12 +43,7 @@ export class AppComponent implements OnInit {
         setViewPort(false, false);
       }
       if (_isTabletView && !_isMobileView && (_isTabletView !== isTabletView || load)) {
-        setViewPort(false, true)
-        this.store.dispatch(
-          new settingsActions.SetStateAction({
-            isMenuCollapsed: true,
-          }),
-        )
+        setViewPort(false, true);
       }
       if (_isMobileView && (_isMobileView !== isMobileView || load)) {
         setViewPort(true, false);

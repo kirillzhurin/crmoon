@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import Order from '../models/order';
@@ -14,8 +14,10 @@ export class OrderService {
     private http: HttpClient
   ){}
 
-  getAll(): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.baseUrl}/order`);
+  getAll(params: any = {}): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.baseUrl}/order`, {
+      params: new HttpParams({ fromObject: params })
+    })
   }
 
   getById(id: string): Observable<Order> {

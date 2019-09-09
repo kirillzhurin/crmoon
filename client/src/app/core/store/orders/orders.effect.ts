@@ -15,7 +15,7 @@ export class OrdersEffect {
   loadCateories$: Observable<actions.OrderActions> = this.actions$.pipe(
     ofType(actions.LOAD_ORDERS),
     mergeMap((action: actions.LoadOrdersAction) =>
-      this.orderService.getAll()
+      this.orderService.getAll(action.payload)
         .pipe(
           map(res => new actions.LoadOrdersSuccessAction(res)),
           catchError(() => of(new actions.LoadOrdersFailAction()))

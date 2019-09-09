@@ -27,7 +27,6 @@ export class MainLayoutComponent implements OnInit {
   constructor(private store: Store<any>) {
     this.store.pipe(select(settingsSelectors.selectSettings)).subscribe(state => {
       this.isLightTheme = state.isLightTheme;
-      this.isMenuCollapsed = state.isMenuCollapsed;
       this.isBorderless = state.isBorderless;
       this.isSquaredBorders = state.isSquaredBorders;
       this.isFixedWidth = state.isFixedWidth;
@@ -42,11 +41,7 @@ export class MainLayoutComponent implements OnInit {
   }
 
   onCollapse(value: any) {
-    this.store.dispatch(
-      new settingsActions.SetStateAction({
-        isMenuCollapsed: value,
-      }),
-    )
+    this.isMenuCollapsed = value;
   }
 
   toggleTheme() {
@@ -58,11 +53,7 @@ export class MainLayoutComponent implements OnInit {
   }
 
   toggleCollapsed() {
-    this.store.dispatch(
-      new settingsActions.SetStateAction({
-        isMenuCollapsed: !this.isMenuCollapsed,
-      }),
-    )
+    this.isMenuCollapsed = !this.isMenuCollapsed;
   }
 
   toggleMobileMenu() {

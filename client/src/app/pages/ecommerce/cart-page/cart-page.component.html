@@ -10,7 +10,7 @@
         </div>
         <div class="cui-cart-steps-content">
           <div *ngIf="step === 0">
-            <nz-table #ordersTable [nzShowPagination]="false" [nzData]="ordersTableData" class="utils__scrollTable" [nzScroll]="{x: '100%'}">
+            <nz-table #ordersTable [nzShowPagination]="false" [nzData]="positions$ | async" class="utils__scrollTable" [nzScroll]="{x: '100%'}">
               <thead>
                 <tr>
                   <th>#</th>
@@ -39,7 +39,7 @@
                   <td>${{position.price}}</td>
                   <td>${{position.price * position.quantity}}</td>
                   <td>
-                    <button nz-button (click)="onDelete(position)"><i nz-icon type="delete"></i> Remove</button>
+                    <button nz-button (click)="onDelete(position)"><i nz-icon nzType="delete"></i> Remove</button>
                   </td>
                 </tr>
               </tbody>
@@ -107,49 +107,8 @@
                       </nz-form-item>
                     </div>
                   </div>
-                  <h4 class="text-black mb-3">
-                    <strong>Billing Details</strong>
-                  </h4>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <nz-form-item>
-                        <nz-form-label nzFor="cardNum" nzRequired>Card Number</nz-form-label>
-                        <nz-input-group [nzAddOnBefore]="addOnCardNum">
-                          <input type="text" nz-input [(ngModel)]="inputValue" formControlName="cardNumber" placeholder="Card Number">
-                        </nz-input-group>
-                        <ng-template #addOnCardNum>
-                          <i nz-icon type="credit-card" theme="outline"></i>
-                        </ng-template>
-                      </nz-form-item>
-                    </div>
-                    <div class="col-md-6">
-                      <nz-form-item>
-                        <nz-form-label nzFor="expDate" nzRequired>Expiration Date</nz-form-label>
-                        <nz-form-control>
-                          <input nz-input id="expDate" formControlName="expirationDate" placeholder="MM / YY">
-                        </nz-form-control>
-                      </nz-form-item>
-                    </div>
-                    <div class="col-md-6">
-                      <nz-form-item>
-                        <nz-form-label nzFor="cvc" nzRequired>Card CVC</nz-form-label>
-                        <nz-form-control>
-                          <input nz-input id="cvc" formControlName="cvc" placeholder="CVC">
-                        </nz-form-control>
-                      </nz-form-item>
-                    </div>
-                    <div class="col-md-12">
-                      <nz-form-item>
-                        <nz-form-label nzFor="cardName" nzRequired>Card Holder Name</nz-form-label>
-                        <nz-form-control>
-                          <input nz-input id="cardName" formControlName="cardHolderName" placeholder="Name and Surname">
-                        </nz-form-control>
-                      </nz-form-item>
-                    </div>
-                  </div>
                 </form>
               </div>
-
             </div>
           </div>
           <div *ngIf="step === 2">
@@ -160,7 +119,7 @@
           <button nz-button nzType="default" (click)="pre()" *ngIf="step > 0">
             <span>Previous</span>
           </button>
-          <button nz-button nzType="default" (click)="next()" [disabled]="form.invalid && step == 1" *ngIf="step < 2">
+          <button nz-button nzType="default" (click)="next()" [disabled]="form.invalid && step == 1 || !(positions$ | async).length" *ngIf="step < 2">
             <span>Next</span>
           </button>
           <button nz-button nzType="primary" (click)="done()" *ngIf="step === 2">

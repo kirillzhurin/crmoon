@@ -13,6 +13,7 @@ export const DELETE_ORDER_FAIL = '[Orders] Deleting order is failed';
 
 export class LoadOrdersAction implements Action {
   readonly type = LOAD_ORDERS;
+  constructor(public payload: any = {}) {}
 }
 
 export class LoadOrdersSuccessAction implements Action {

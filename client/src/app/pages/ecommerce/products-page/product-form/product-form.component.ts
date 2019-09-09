@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store, select, ActionsSubject } from '@ngrx/store';
@@ -23,14 +23,14 @@ import {
   DELETE_PRODUCT_SUCCESS
 } from 'src/app/core/store/products';
 import { LoadCategoriesAction, selectAllCategories } from 'src/app/core/store/categories';
+import { BaseComponent } from 'src/app/shared/helpers/base.component';
 
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.scss']
 })
-export class ProductFormComponent implements OnInit, OnDestroy {
-  private destroy$: Subject<void> = new Subject<void>();
+export class ProductFormComponent extends BaseComponent implements OnInit {
   id: string;
   sizes = SIZES;
   colors = COLORS;
@@ -55,7 +55,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     private actionSubject: ActionsSubject,
     private fileReaderService: FileReaderService,
     private modalService: NzModalService
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.store.dispatch(new LoadCategoriesAction());
@@ -155,10 +157,4 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       nzOnOk: () => this.store.dispatch(new DeleteProductAction(this.id))
     });
   }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
 }

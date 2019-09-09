@@ -11,11 +11,13 @@ import { ProductsPageComponent } from './products-page/products-page.component';
 import { ProductFormComponent } from './products-page/product-form/product-form.component';
 import { ProductDetailsComponent } from './products-page/product-details/product-details.component';
 import { CartPageComponent } from './cart-page/cart-page.component';
+import { OrderDetailsComponent } from './orders-page/order-details/order-details.component';
 
 const COMPONENTS = [
   CategoriesPageComponent,
   CategoryFormComponent,
   OrdersPageComponent,
+  OrderDetailsComponent,
   ProductsPageComponent,
   ProductFormComponent,
   ProductDetailsComponent,

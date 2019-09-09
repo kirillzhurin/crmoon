@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AuthLayoutComponent, MainLayoutComponent } from './theme/layouts';
 import { ThemeModule } from './theme/theme.module';
 import { AuthGuard } from './core/guards/auth.guard';
+import { SharedModule } from './shared/shared.module';
 import {
   LoginPageComponent,
   RegisterPageComponent,
@@ -49,8 +50,10 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     ThemeModule,
-    ReactiveFormsModule],
+    SharedModule
+  ],
   declarations: [...COMPONENTS],
   exports: [RouterModule],
 })

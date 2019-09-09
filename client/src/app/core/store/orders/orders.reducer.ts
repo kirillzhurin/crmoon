@@ -6,7 +6,7 @@ export function reducer(state: State = initialState, { type, payload }): State {
     case actions.LOAD_ORDERS:
       return state
     case actions.LOAD_ORDERS_SUCCESS:
-      return adapter.addMany(payload, {...state});
+      return adapter.addMany(payload, { ...state });
     case actions.LOAD_ORDERS_FAIL:
       return state;
     case actions.CREATE_ORDER:

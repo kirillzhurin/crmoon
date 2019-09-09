@@ -7,7 +7,7 @@
 }">
   <nz-back-top></nz-back-top>
   <!-- left menu -->
-  <nz-sider *ngIf="!isMobileView && !isMenuTop" [ngClass]="isLightTheme ? 'sider light' : 'sider'" nzCollapsible [nzWidth]="256" [(nzCollapsed)]="isMenuCollapsed" (nzCollapsedChange)="onCollapse($event)">
+  <nz-sider *ngIf="!isMobileView && !isMenuTop" [ngClass]="isLightTheme ? 'sider light' : 'sider'" nzCollapsible [nzWidth]="256" [(nzCollapsed)]="isMenuCollapsed">
     <app-menu-left [isMenuCollapsed]="isMenuCollapsed"></app-menu-left>
   </nz-sider>
   <!-- mobile menu with drawer -->

@@ -48,6 +48,11 @@ export const getLeftMenuData: any[] = [
         url: '/ecommerce/orders',
       },
       {
+        title: 'Order Details',
+        url: '/ecommerce/orders/[0-9a-z]+',
+        hidden: true
+      },
+      {
         title: 'New Product',
         url: '/ecommerce/products/new',
         hidden: true

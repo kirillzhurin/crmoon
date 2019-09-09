@@ -7,55 +7,57 @@
       </div>
     </div>
     <div class="card-body">
-      <nz-table #orderTable [nzData]="displayProductsData">
-        <thead (nzSortChange)="sort($event)" nzSingleSort>
+      <nz-table
+        #orderTable
+        [(nzPageSize)]="pageSize"
+        [(nzPageIndex)]="pageIndex"
+        [nzData]="orders"
+      >
+        <thead>
         <tr>
-          <th nzShowSort nzSortKey="id">ID</th>
-          <th nzShowSort nzSortKey="date">Purchase Date</th>
-          <th nzShowSort nzSortKey="customer">Customer</th>
-          <th nzShowSort nzSortKey="total">Grand Total</th>
-          <th nzShowSort nzSortKey="tax">Tax</th>
-          <th nzShowSort nzSortKey="shipping">Shipping</th>
-          <th nzShowSort nzSortKey="quantity">Quantity</th>
-          <th nzShowSort nzSortKey="status">Status</th>
+          <th>ID</th>
+          <th>Purchase Date</th>
+          <th>Customer</th>
+          <th>Phone</th>
+          <th>Total Price</th>
+          <th>Quantity</th>
+          <th>Status</th>
           <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of displayProductsData">
+        <tr *ngFor="let order of orderTable.data">
           <td>
             <a href="javascript: void(0);" class="utils__link--underlined">
-              #{{item.id}}
+              #{{order.order}}
             </a>
           </td>
           <td>
-            {{item.date}}
+            {{order.date | date}}
           </td>
           <td>
             <a href="javascript: void(0);" class="utils__link--underlined">
-              {{item.customer}}
+              {{order.name}}
             </a>
           </td>
           <td>
-            ${{item.total}}
+            {{order.phone}}
           </td>
           <td>
-            ${{item.tax}}
+            ${{order.total}}
           </td>
           <td>
-            {{item.shipping}}
+            {{order.quantity}}
           </td>
           <td>
-            {{item.quantity}}
+            <span *ngIf="order.paid; else noPaid" class="badge badge-default font-size-12">Shipping</span>
+            <ng-template #noPaid>
+              <span class="badge badge-primary font-size-12">Pending payment</span>
+            </ng-template>
           </td>
           <td>
-            <span [ngClass]="[item.status === 'Processing' ? 'badge badge-primary font-size-12' : 'badge badge-default font-size-12']">
-              {{item.status}}
-            </span>
-          </td>
-          <td>
-            <button nz-button class="mr-1" nzSize="small"><i nz-icon type="edit" theme="outline"></i> View</button>
-            <button nz-button class="mr-1" nzSize="small"><i nz-icon type="delete" theme="outline"></i> Remove</button>
+            <button nz-button class="mr-1" nzSize="small"><i nz-icon nzType="edit" theme="outline"></i> View</button>
+            <button nz-button class="mr-1" nzSize="small"><i nz-icon nzType="delete" theme="outline"></i> Remove</button>
           </td>
         </tr>
         </tbody>

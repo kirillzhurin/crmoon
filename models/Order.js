@@ -2,6 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ordersSchema = new Schema({
+  email: String,
+  phone: String,
+  name: String,
+  surname: String,
+  city: String,
+  address: String,
+  paid: {
+    type: Boolean,
+    default: false
+  },
   date: {
     type: Date,
     default: Date.now

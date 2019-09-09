@@ -1,5 +1,6 @@
 const Order = require('../models/Order');
 const errorHandler = require('../utils/errorHandler');
+const R = require('ramda');
 
 module.exports.getAll = async (req, res) => {
   const { offset, limit, start, end, order } = req.query;
@@ -30,20 +31,20 @@ module.exports.getAll = async (req, res) => {
       .sort({ date: -1 })
       .skip(+offset)
       .limit(+limit);
-    res.send(orders)
+    res.send(orders);
   } catch (error) {
     errorHandler(res, error);
   }
 }
 
 module.exports.create = async (req, res) => {
-  const { list } = req.body;
   const user = req.user.id;
+  const data = R.pick(['name', 'surname', 'email', 'city', 'address', 'phone', 'list',], req.body);
   try {
     const lastOrder = await Order.findOne({ user }).sort({ date: -1 });
     const maxOrder = lastOrder ? lastOrder.order + 1 : 0
     const order =  new Order({
-      list,
+      ...data,
       user,
       order: maxOrder
     });

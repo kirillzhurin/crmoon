@@ -7,6 +7,7 @@ import { OrdersPageComponent } from './orders-page/orders-page.component';
 import { ProductsPageComponent } from './products-page/products-page.component';
 import { ProductFormComponent } from './products-page/product-form/product-form.component';
 import { ProductDetailsComponent } from './products-page/product-details/product-details.component';
+import { OrderDetailsComponent } from './orders-page/order-details/order-details.component';
 
 const routes: Routes = [
   {
@@ -48,7 +49,12 @@ const routes: Routes = [
   {
     path: 'orders',
     component: OrdersPageComponent,
+  },
+  {
+    path: 'orders/:id',
+    component: OrderDetailsComponent,
   }
+
 ]
 
 @NgModule({

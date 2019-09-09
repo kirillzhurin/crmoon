@@ -37,15 +37,15 @@
           {{data.invoiceNumber}}
         </a>
         <br />
-        <span class="font-size-20">{{data.recipient.name}}</span>
+        <span class="font-size-20">{{data.name}}</span>
       </p>
       <address>
-        {{data.recipient.address}}
+        {{data.address}}
         <br />
         <abbr class="mr-2" title="Phone">
           P:
         </abbr>
-        {{data.recipient.phone}}
+        {{data.phone}}
         <br />
       </address>
       <span>Invoice Date: {{invoiceDate}}</span>
@@ -55,7 +55,7 @@
       <br />
     </div>
   </div>
-  <nz-table #basicTable [nzShowPagination]="false" [nzData]="data.positions">
+  <nz-table #basicTable [nzShowPagination]="false" [nzData]="data.list">
     <thead>
       <tr>
         <th>Number</th>
@@ -68,7 +68,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let position of data.positions; let idx = index">
+      <tr *ngFor="let position of data.list; let idx = index">
         <td>{{idx + 1}}</td>
         <td>{{position.title}}</td>
         <td>{{position.color}}</td>
@@ -84,7 +84,7 @@
       <strong>Total: <span>{{data.total}}</span></strong>
     </div>
   </div>
-  <div class="text-right">
+  <div class="text-right" *ngIf="!data.paid && data.id">
     <button class="mr-2" nz-button nzType="primary">
       <i nz-icon type="check-circle-o"></i> Proceed to payment
     </button>
