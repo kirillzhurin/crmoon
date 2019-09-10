@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { capitalize, omit } from 'lodash';
-import { Observable } from 'rxjs';
 import { switchMap, skipWhile } from 'rxjs/operators';
 import Product from 'src/app/core/models/product';
 import Position from 'src/app/core/models/position';
@@ -28,7 +27,6 @@ export class ProductDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.route.params.pipe(
       switchMap(({ id }) => {
         this.id = id;

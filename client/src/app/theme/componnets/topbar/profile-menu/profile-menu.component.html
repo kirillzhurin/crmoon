@@ -1,7 +1,5 @@
 <a nz-dropdown nzTrigger="click" class="dropdown" [nzDropdownMenu]="menu" [nzPlacement]="'bottomRight'" (nzVisibleChange)="badgeCountIncrease()">
-  <nz-badge [nzCount]="badgeCount">
-    <nz-avatar nzIcon="user" [nzShape]="'square'" [nzSize]="'large'" class="avatar"></nz-avatar>
-  </nz-badge>
+  <nz-avatar nzIcon="user" nzShape="circle" [nzSize]="'large'" class="avatar"></nz-avatar>
 </a>
 <nz-dropdown-menu  #menu="nzDropdownMenu">
   <ul nz-menu>
@@ -19,7 +17,7 @@
     </li>
     <li nz-menu-divider></li>
     <li nz-menu-item>
-      <a href="javascript: void(0);">
+      <a href="javascript: void(0);" [routerLink]="['/profile']">
         <i class="menuIcon icmn-user"></i>
         Edit Profile
       </a>

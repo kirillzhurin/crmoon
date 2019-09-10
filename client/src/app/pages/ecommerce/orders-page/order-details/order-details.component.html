@@ -1,1 +1,22 @@
-<p>order-details works!</p>
+<div class="card">
+  <div class="card-header">
+    <div class="utils__title">
+      <strong>
+        Order #{{order?.order}}
+      </strong>
+    </div>
+  </div>
+  <div class="card-body">
+    <div *ngIf="order; else empty">
+      <invoice [data]="order" ></invoice>
+      <div class="text-right" *ngIf="!order.paid">
+        <button class="mr-2" nz-button nzType="primary" (click)="handlePayment()">
+          <i nz-icon type="check-circle-o"></i> Proceed to payment
+        </button>
+      </div>
+    </div>
+    <ng-template #empty>
+        <nz-empty></nz-empty>
+    </ng-template>
+  </div>
+</div>

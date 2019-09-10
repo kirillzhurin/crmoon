@@ -38,7 +38,7 @@
           <td>{{order.quantity}}</td>
           <td>${{order.total}}</td>
           <td>
-            <span *ngIf="order.paid; else noPaid" class="badge badge-default font-size-12">Shipping</span>
+            <span *ngIf="order.paid; else noPaid" class="badge badge-success font-size-12">Shipping</span>
             <ng-template #noPaid>
               <span class="badge badge-primary font-size-12">Pending payment</span>
             </ng-template>

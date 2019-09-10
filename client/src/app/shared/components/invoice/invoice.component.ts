@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { format, addDays } from 'date-fns';
-import Position from 'src/app/core/models/position';
 
 @Component({
   selector: 'invoice',
