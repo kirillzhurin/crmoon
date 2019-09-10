@@ -36,4 +36,17 @@ export class OrdersEffect {
     )
   );
 
+  @Effect()
+  deleteOrder$: Observable<actions.OrderActions> = this.actions$.pipe(
+    ofType(actions.DELETE_ORDER),
+    mergeMap(({ payload }: actions.DeleteOrderAction) => this.orderService.delete(payload)
+      .pipe(
+        map(res => {
+          return new actions.DeleteOrderSuccessAction(res);
+        }),
+        catchError(() => of(new actions.DeleteOrderFailAction()))
+      )
+    )
+  );
+
 }

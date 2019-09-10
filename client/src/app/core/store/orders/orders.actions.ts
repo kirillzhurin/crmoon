@@ -39,10 +39,27 @@ export class CreateOrderFailAction implements Action {
   readonly type = CREATE_ORDER_FAIL;
 };
 
+export class DeleteOrderAction implements Action {
+  readonly type = DELETE_ORDER
+  constructor(public payload: string) {}
+}
+
+export class DeleteOrderSuccessAction implements Action {
+  readonly type = DELETE_ORDER_SUCCESS
+  constructor(public payload: any) {}
+}
+
+export class DeleteOrderFailAction implements Action {
+  readonly type = DELETE_ORDER_FAIL
+}
+
 export type OrderActions =
   LoadOrdersAction |
   LoadOrdersSuccessAction |
   LoadOrdersFailAction |
   CreateOrderAction |
   CreateOrderSuccessAction |
-  CreateOrderFailAction;
+  CreateOrderFailAction |
+  DeleteOrderAction |
+  DeleteOrderSuccessAction |
+  DeleteOrderFailAction;

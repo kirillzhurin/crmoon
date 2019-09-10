@@ -9,7 +9,7 @@
     <div class="card-body">
       <nz-table
         #orderTable
-        [(nzPageSize)]="pageSize"
+        [nzPageSize]="pageSize"
         [(nzPageIndex)]="pageIndex"
         [nzData]="orders"
       >
@@ -19,8 +19,8 @@
           <th>Purchase Date</th>
           <th>Customer</th>
           <th>Phone</th>
-          <th>Total Price</th>
           <th>Quantity</th>
+          <th>Total Price</th>
           <th>Status</th>
           <th>Action</th>
         </tr>
@@ -32,23 +32,11 @@
               #{{order.order}}
             </a>
           </td>
-          <td>
-            {{order.date | date}}
-          </td>
-          <td>
-            <a href="javascript: void(0);" class="utils__link--underlined">
-              {{order.name}}
-            </a>
-          </td>
-          <td>
-            {{order.phone}}
-          </td>
-          <td>
-            ${{order.total}}
-          </td>
-          <td>
-            {{order.quantity}}
-          </td>
+          <td>{{order.date | date}}</td>
+          <td>{{order.name}}</td>
+          <td>{{order.phone}}</td>
+          <td>{{order.quantity}}</td>
+          <td>${{order.total}}</td>
           <td>
             <span *ngIf="order.paid; else noPaid" class="badge badge-default font-size-12">Shipping</span>
             <ng-template #noPaid>
@@ -56,12 +44,11 @@
             </ng-template>
           </td>
           <td>
-            <button nz-button class="mr-1" nzSize="small"><i nz-icon nzType="edit" theme="outline"></i> View</button>
-            <button nz-button class="mr-1" nzSize="small"><i nz-icon nzType="delete" theme="outline"></i> Remove</button>
+            <button [routerLink]="['./', order._id]" nz-button class="mr-1" nzSize="small"><i nz-icon nzType="eye" nzTheme="outline"></i> Details</button>
+            <button (click)="showConfirm(order._id)" nz-button class="mr-1" nzSize="small"><i nz-icon nzType="delete" theme="outline"></i> Remove</button>
           </td>
         </tr>
         </tbody>
       </nz-table>
     </div>
   </div>
-

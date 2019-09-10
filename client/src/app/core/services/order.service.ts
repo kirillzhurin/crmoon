@@ -8,25 +8,28 @@ import Order from '../models/order';
   providedIn: 'root'
 })
 export class OrderService {
-  private baseUrl = environment.API_URL;
+  private baseUrl = environment.API_URL + '/order';
 
   constructor(
     private http: HttpClient
   ){}
 
   getAll(params: any = {}): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.baseUrl}/order`, {
+    return this.http.get<Order[]>(`${this.baseUrl}`, {
       params: new HttpParams({ fromObject: params })
     })
   }
 
   getById(id: string): Observable<Order> {
-    return this.http.get<Order>(`${this.baseUrl}/order/${id}`);
+    return this.http.get<Order>(`${this.baseUrl}/${id}`);
   }
 
   create(data: any): Observable<Order> {
-    return this.http.post<Order>(`${this.baseUrl}/order`, data);
+    return this.http.post<Order>(`${this.baseUrl}`, data);
   }
 
+  delete(id): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
 
 }

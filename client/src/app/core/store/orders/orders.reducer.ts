@@ -15,6 +15,12 @@ export function reducer(state: State = initialState, { type, payload }): State {
       return adapter.addOne(payload, { ...state });
     case actions.CREATE_ORDER_FAIL:
       return state;
+    case actions.DELETE_ORDER:
+      return state;
+    case actions.DELETE_ORDER_SUCCESS:
+      return adapter.removeOne(payload.id, { ...state });
+    case actions.DELETE_ORDER_FAIL:
+      return state;
     default:
       return state;
   }

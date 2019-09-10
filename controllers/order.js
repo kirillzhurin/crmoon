@@ -54,3 +54,14 @@ module.exports.create = async (req, res) => {
     errorHandler(res, error);
   }
 }
+
+module.exports.remove = async (req, res) => {
+  const user = req.user.id;
+  const { id } = req.params;
+  try {
+    await Order.remove({ _id: id });
+    res.status(200).json({ id });
+  } catch (error) {
+    errorHandler(res, error);
+  }
+}
