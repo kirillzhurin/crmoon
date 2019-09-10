@@ -32,4 +32,8 @@ export class OrderService {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
+  payment(data: any): Observable<Order> {
+    return this.http.post<Order>(`${this.baseUrl}/payment`, data);
+  }
+
 }

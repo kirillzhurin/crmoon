@@ -1,5 +1,7 @@
 const Order = require('../models/Order');
 const errorHandler = require('../utils/errorHandler');
+const keys = require('../config/keys');
+const stripe = require('stripe')(keys.stripeSecretKey);
 const R = require('ramda');
 
 module.exports.getAll = async (req, res) => {
@@ -37,6 +39,15 @@ module.exports.getAll = async (req, res) => {
   }
 }
 
+module.exports.getById = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    res.status(200).json(order);
+  } catch (error) {
+    errorHandler(res, error);
+  }
+}
+
 module.exports.create = async (req, res) => {
   const user = req.user.id;
   const data = R.pick(['name', 'surname', 'email', 'city', 'address', 'phone', 'list',], req.body);
@@ -64,4 +75,23 @@ module.exports.remove = async (req, res) => {
   } catch (error) {
     errorHandler(res, error);
   }
+}
+
+
+module.exports.payment = async (req, res) => {
+  const {amount, tokenId, orderId} = req.body
+  const order = await Order.findById(orderId);
+  if (order.paid) {
+    res.status(400).json({error: 'Order has already been paid, you cannot do it twice'});
+  }
+  const charge = await stripe.charges.create({
+    amount,
+    currency: 'usd',
+    description: `Order #${order.order} payment`,
+    source: tokenId
+  });
+
+  order.paid = true;
+  const data = await order.save();
+  res.status(200).json(data);
 }

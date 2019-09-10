@@ -17,8 +17,18 @@ export const selectOrderEntities = createSelector(
 
 export const selectOrderById = createSelector(
   selectOrderEntities,
-  (entities, props) => entities[props.id]
+  (entities, props) => {
+    const order = {...entities[props.id]};
+    if (order.list) {
+      order.total =  order.list.reduce((previous, current) => {
+        previous += current.price * current.quantity;
+        return previous;
+      }, 0)
+    }
+    return order;
+  }
 );
+
 
 
 

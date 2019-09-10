@@ -24,6 +24,18 @@ export class OrdersEffect {
   );
 
   @Effect()
+  getOrder$: Observable<actions.OrderActions> = this.actions$.pipe(
+    ofType(actions.GET_ORDER),
+    mergeMap((action: actions.GetOrderAction) =>
+      this.orderService.getById(action.payload)
+        .pipe(
+          map(res => new actions.GetOrderSuccessAction(res)),
+          catchError(() => of(new actions.GetOrderFailAction()))
+        )
+    )
+  );
+
+  @Effect()
   createOrder$: Observable<actions.OrderActions> = this.actions$.pipe(
     ofType(actions.CREATE_ORDER),
     mergeMap(({ payload }: actions.CreateOrderAction) => this.orderService.create(payload)
@@ -32,6 +44,19 @@ export class OrdersEffect {
           return new actions.CreateOrderSuccessAction(res);
         }),
         catchError(() => of(new actions.CreateOrderFailAction()))
+      )
+    )
+  );
+
+  @Effect()
+  paymentOrder$: Observable<actions.OrderActions> = this.actions$.pipe(
+    ofType(actions.PAYMENT_ORDER),
+    mergeMap(({ payload }: actions.PaymentOrderAction) => this.orderService.payment(payload)
+      .pipe(
+        map(res => {
+          return new actions.PaymentOrderSuccessAction(res);
+        }),
+        catchError(() => of(new actions.PaymentOrderFailAction()))
       )
     )
   );
