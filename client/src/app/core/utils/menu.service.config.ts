@@ -105,14 +105,25 @@ export const getTopMenuData: any[] = [
         url: '/analytics',
       },
       {
-        title: 'Add Order',
-        key: 'addOrder',
-        url: '/order/new',
-      },
-      {
-        title: 'Positions ',
-        key: 'positions',
-        url: '/positions',
+        title: 'eCommerce',
+        key: 'ecommerce',
+        children: [
+          {
+            title: 'Categories',
+            key: 'categories',
+            url: '/ecommerce/categories',
+          },
+          {
+            title: 'Products',
+            key: 'products',
+            url: '/ecommerce/products',
+          },
+          {
+            title: 'Orders',
+            key: 'orders',
+            url: '/ecommerce/orders',
+          }
+        ],
       },
     ],
   },
